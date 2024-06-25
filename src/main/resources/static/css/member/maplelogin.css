@@ -1,0 +1,84 @@
+@import url(/css/common/parkReset.css);
+.container {
+  width: 100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  background:url(/images/logingo.jpg) repeat 50%;
+  background-size:cover;
+}
+input::placeholder{
+font-weight:bold;
+color:#aa8566;
+}
+
+.login{
+display:flex;
+justify-content:center;
+align-items:center;
+}
+.login-con{
+}
+.loginForm{
+padding:10px;
+display:flex;
+justify-content:space-between;
+}
+form{
+width:350px;
+height:200px;
+background-color:#e9dbc2;
+}
+.loginGo button{
+background-color:#cca083;
+border-radius:3px;
+border:0;
+height:100%;
+width:80px;
+}
+.loginInput{
+display:flex;
+flex-direction:column;
+gap:5px;
+}
+.loginInput input{
+width:230px;
+height:35px;
+border: 0;
+background-color: #ccba99;
+padding:5px;
+}
+.find{
+display:flex;
+justify-content:space-between;
+padding:5px;
+}
+.find a{
+font-size:20px;
+font-weight:bold;
+color:#7c5138;
+}
+.find label{
+font-size:20px;
+font-weight:bold;
+color:#7c5138;
+}
+
+.join{
+display:flex;
+justify-content:space-between;
+padding:5px;
+}
+.join a{
+    background-color: #d7b88e;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    width: 100px;
+    height: 30px;
+    display: flex;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}

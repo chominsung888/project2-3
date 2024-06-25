@@ -2,6 +2,7 @@ package org.spring.codingStory.approval.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.spring.codingStory.approval.dto.ApprovalFileDto;
 
 import javax.persistence.*;
 
@@ -23,11 +24,20 @@ public class ApprovalFileEntity {
     private String apvNewFileName;
 
     @Column(nullable = false)
-    private String avpOldFileName;
+    private String apvOldFileName;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apv_id")
     private ApprovalEntity approvalEntity;
 
+    public static ApprovalFileEntity toApvWriteFile(ApprovalFileDto approvalFileDto) {
+        ApprovalFileEntity approvalFileEntity = new ApprovalFileEntity();
+
+        approvalFileEntity.setApvNewFileName(approvalFileDto.getApvNewFileName());
+        approvalFileEntity.setApvOldFileName(approvalFileDto.getApvOldFileName());
+        approvalFileEntity.setApprovalEntity(approvalFileDto.getApprovalEntity());
+
+        return approvalFileEntity;
+    }
 }

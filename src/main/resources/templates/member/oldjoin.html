@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>index</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script th:src="@{/js/member/memberJoin.js}" defer></script>
+  <link rel="stylesheet" th:href="@{/css/member/join.css}">
+</head>
+<div class="container">
+  <div class="join">
+    <img th:src="@{/images/logo.png}" alt="logo" th:onClick="|location.href='@{/}'|" style="cursor:pointer;">
+    <form th:action="@{/member/join}" method="POST" enctype="multipart/form-data" >
+      <div class="join-form">
+        <div class="join-form-con">
+          <div class="email" id="email">
+            <img th:src="@{/images/mail.png}" alt="mail">
+            <input type="text" id="userEmail" name="userEmail" maxlength="20" placeholder="이메일(아이디)" oninput="emailCheck()">
+            <h3>naver.com</h3>
+          </div>
+          <span id="emailConfirm"></span>
+
+          <div class="password" id="password">
+            <img th:src="@{/images/password.png}" alt="password">
+            <input type="text" id="userPw" name="userPw" placeholder="비밀번호" maxlength="20" oninput="passwordCheck()">
+          </div>
+          <div class="password2" id="password2">
+            <img th:src="@{/images/password.png}" alt="password">
+            <input type="text" id="userPwCheck" name="userPwCheck" placeholder="비밀번호확인" maxlength="20" oninput="passwordCheck()">
+          </div>
+          <span id="pwConfirm"></span>
+
+          <div class="userName" id="userName">
+            <img th:src="@{/images/name.png}" alt="name" >
+            <input type="text" id="name" name="name" placeholder="이름" maxlength="15" oninput="nameCheck()">
+          </div>
+          <div>
+            <img th:src="@{/images/name.png}" alt="mRank">
+            <input type="text" id="mRank" name="mRank" placeholder="직급" maxlength="10">
+          </div>
+          <div>
+            <img th:src="@{/images/home.png}" alt="home">
+            <input type="text" id="address" name="address" placeholder="주소">
+          </div>
+          <div class="phone" id="phone">
+            <img th:src="@{/images/phoneNumber.png}" alt="phoneNumber">
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="번호" maxlength="15" oninput="phoneNumberCheck()" >
+          </div>
+
+          <div class="radios">
+            <img th:src="@{/images/group.png}" alt="group">
+            <input type="radio" id="a1" name="department" value="일반관">
+            <label for="a1">일반관</label>
+
+            <input type="radio" id="a2" name="department" value="야외관">
+            <label for="a2">야외관</label>
+
+            <input type="radio" id="a3" name="department" value="자동차극장">
+            <label for="a3">자동차극장</label>
+
+            <input type="radio" id="a4" name="department" value="해외지점">
+            <label for="a4">해외지점</label>
+          </div>
+
+          <div class="fileInput">
+            <label for="memberFile" class="btn">파일업로드</label>
+            <input id="memberFile" name="memberFile" style="display:none;" type="file">
+          </div>
+
+        </div>
+      </div>
+      <div class="ok">
+        <button type="submit" id="joinGo">회원가입완료</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<body>
+</body>
+</html>

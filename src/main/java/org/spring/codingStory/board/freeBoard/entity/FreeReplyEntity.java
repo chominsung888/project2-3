@@ -2,7 +2,6 @@ package org.spring.codingStory.board.freeBoard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.spring.codingStory.board.employee.entity.EmployeeEntity;
 import org.spring.codingStory.contraint.BaseTimeEntity;
 
 import javax.persistence.*;

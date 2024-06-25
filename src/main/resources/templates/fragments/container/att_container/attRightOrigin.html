@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="attRightOriginFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAnonymous()">
+                        <li><a th:href="@{/member/login}">로그인</a></li>
+                        <li><a th:href="@{/member/join}">회원가입</a></li>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        로그인중
+                    </th:block>
+
+                    <li><a th:href="@{/member/detail/}" th:text="${ #authentication.principal.username }"></a></li>
+
+
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="admin-data">
+                <div class="container">
+                    <div class="attendanceWrite">
+                        <div class="attendanceWrite-con">
+                            <div class="attendanceWrite-form">
+
+                                <ul>
+
+                                    <li>
+                                        <label for="id">attendance ID</label>
+                                        <input type="hidden" name="id" id="id" th:value="${id}" readonly>
+                                    </li>
+
+
+                                    <li>
+                                        <label for="name">이름</label>
+                                        <input type="text" name="name" id="name" th:value="${name}" readonly>
+                                    </li>
+
+                                    <li>
+                                        <label for="memberId">memberId</label>
+                                        <input type="text" name="memberId" id="memberId" th:value="${memberId}"
+                                               readonly>
+                                    </li>
+
+                                    <li>
+                                        <input type="button" name="checkInTimeBtn" id="checkInTimeBtn"
+                                               value="checkInTimeBtn">
+
+                                        <div id="attendanceInfo"></div> <!-- 추가된 정보 표시 영역 -->
+
+
+                                    </li>
+                                    <li>
+                                        <input type="button" name="checkOutTimeBtn" id="checkOutTimeBtn"
+                                               value="checkOutTimeBtn">
+                                    </li>
+
+
+
+
+                                </ul>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

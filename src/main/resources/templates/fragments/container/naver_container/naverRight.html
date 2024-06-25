@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script>
+
+    $(function(){
+      $.each($(".group"),function(index,item){
+        if($(item).children().length == 0){
+          $(item).remove();
+        }
+      })
+    });
+
+</script>
+
+<div class="right" th:fragment="naverRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-bottom">
+
+
+
+                        <div class="naver-group">
+                            <ul class="parent-node">
+                                <!-- 조직 연동 기본 구조 -->
+                                <!--
+                                 회사          "asdf"
+                                 기획부    parentOrgUnitId "asdf"
+                                           orgUnitId "asdfg"
+                                 기획1부   parentOrgUnitId "asdfg"
+                                 기획2부   parentOrgUnitId "asdfg"
+                                  -->
+                                <li class="node" th:each="dto1:${list}" th:if="${#strings.isEmpty(dto1.parentOrgUnitId)}">
+
+                                    <!--<div class="pagination" id="pagination" style="margin-top: 20px; text-align: center;">-->
+                                    <a th:text="${dto1.orgUnitName}" style="font-size: 36px; font-weight: bold; margin-bottom: 10px;" ></a>
+                                    <ul class="group">
+                                        <li class="tree-node node" th:each="dto2:${list}" th:if="${dto1.orgUnitId eq dto2.parentOrgUnitId}">
+                                            <a th:text="${dto2.orgUnitName}"></a>
+                                            <ul class="group">
+                                                <li class="tree-node node" th:each="dto3:${list}" th:if="${dto2.orgUnitId eq dto3.parentOrgUnitId}">
+                                                    <a th:text="${dto3.orgUnitName}"></a>
+                                                    <ul class="group">
+                                                        <li class="tree-node node" th:each="dto4:${list}" th:if="${dto3.orgUnitId eq dto4.parentOrgUnitId}">
+                                                            <a th:text="${dto4.orgUnitName}"></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+
+
+        </div>
+    </div>
+</div>
+</html>

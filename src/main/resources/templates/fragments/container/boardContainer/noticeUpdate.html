@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 여기에 헤더 정보를 추가하세요 -->
+</head>
+<body>
+<div class="right" th:fragment="noticeUpdateFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="index-data">
+                    <div class="boardDetail">
+                        <div class="boardDetail-con">
+                            <div class="top">
+                                <div class="boardDetail-form">
+                                    <form th:action="@{/board/noticeUpdate}" method="post" enctype="multipart/form-data">
+                                        <div class="left-board">
+                                            <div class="left-board-con">
+                                                <th:block th:if="${notice.noticeAttachFile==1}"> <!--  이미지 표시 -->
+                                                    <img th:src="@{|/upload/${notice.newFileName}|}" alt="이미지대체문구">
+                                                </th:block>
+                                                <th:block th:unless="${notice.noticeAttachFile==1}">  <!--  이미지 표시 -->
+                                                    <img src="https://placehold.co/400x500?text=NOIMAGE" alt="이미지대체문구">
+                                                </th:block>
+                                            </div>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                수정게시판
+                                            </li>
+                                            <li>
+                                                <input type="hidden" name="id" id="id" th:value="${notice.id}" readonly>
+                                            </li>
+                                            <li>
+                                                <select name="category" id="category">
+                                                    <option value="본사">본사</option>
+                                                    <option value="노원점">노원점</option>
+                                                    <option value="자동차관">자동차관</option>
+                                                    <option value="야외관">야외관</option>
+                                                    <option value="커플관">커플관</option>
+                                                </select>
+                                            </li>
+                                            <li>
+                                                <label for="memberId">MemberId</label>
+                                                <input type="text" name="memberId" id="memberId" th:value="${notice.memberEntity.id}"
+                                                       readonly>
+                                            </li>
+                                            <li>
+                                                <label for="noticeTitle">TITLE</label>
+                                                <input type="text" name="noticeTitle" id="noticeTitle" th:value="${notice.noticeTitle}">
+                                            </li>
+                                            <li>
+                                                <label for="noticeContent">CONTENT</label>
+                                            </li>
+                                            <li>
+                                            <textarea name="noticeContent" id="noticeContent" cols="30" rows="3"
+                                                    th:text="${notice.noticeContent}"></textarea>
+                                            </li>
+
+                                            <li>
+                                                <label for="noticeHit">HIT</label>
+                                                <input type="text" name="noticeHit" id="noticeHit" th:value="${notice.noticeHit}" readonly>
+                                            </li>
+
+
+                                            <li>
+                                                <label for="noticeWriter">작성자</label>
+                                                <input type="text" name="noticeWriter" id="noticeWriter" th:value="${notice.noticeWriter}"
+                                                       readonly>
+                                            </li>
+                                            <li>
+                                                <label for="createTime">작성시간</label>
+                                                <input type="text"
+                                                       th:value="${#temporals.format(notice.createTime, 'yyyy-MM-dd HH:mm')}"
+                                                       id="createTime" readonly>
+                                            </li>
+                                            <li>
+                                                <label for="updateTime">수정시간</label>
+                                                <input type="text"
+                                                       th:value="${#temporals.format(notice.updateTime, 'yyyy-MM-dd HH:mm')}"
+                                                       id="updateTime" readonly>
+                                            </li>
+                                            <li>
+                                                <label for="boardFile">File</label>
+                                                <input type="file" name="boardFile" id="boardFile">
+                                            </li>
+                                            <li>
+
+                                                <th:block  sec:authorize="isAuthenticated()">
+                                                    <th:blcok style="display:flex;" th:if="${notice.memberEntity.userEmail==myUserDetails.username}">
+
+                                                        <input type="submit" value="수정" class="btn1">
+
+                                                        <a th:href="@{/board/noticeDelete/{id}(id=${notice.id})}" class="btn1">삭제</a>
+                                                        <a th:href="@{/board/noticeList}" class="btn1">목록</a>
+                                                    </th:blcok>
+                                                </th:block>
+
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

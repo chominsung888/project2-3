@@ -1,0 +1,200 @@
+
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 100px;
+}
+
+h1  {
+    display: flex;
+    height:70px;
+    justify-content: center;
+    border: 1px solid;
+    border-radius: 7px 7px 7px 7px;
+    padding: 20px;
+    background-color:rgba(0,199,60,0.5)
+}
+
+img#logo {
+     position: absolute;
+     top: 110px;
+     left: 70px;
+     width: 150px;
+     height: auto;
+     z-index: 1000;
+    }
+
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+input#search-input {
+    width: 300px;
+    height: 30px;
+}
+
+/* 영화 컨테이너 스타일 */
+#movie-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 한 줄에 5개씩 그리드 컬럼 설정 */
+    grid-template-rows: auto; /* 내용에 맞게 자동으로 행 설정 */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* 각 영화 박스 스타일 */
+.movie {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    cursor: pointer; /* 클릭 가능하도록 커서 설정 */
+}
+
+.movie:hover {
+    transform: scale(1.05);
+}
+
+/* 영화 포스터 스타일 */
+.movie img {
+    width: 100%;
+    height: auto;
+}
+
+/* 영화 정보 스타일 */
+.movie p, .movie h2 {
+    margin: 10px;
+    padding: 0;
+}
+
+.movie h2 {
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+}
+
+.movie h2.movieTitle {
+    text-decoration: underline;
+}
+
+.movie p {
+    color: #666;
+    font-size: 0.9em;
+    max-height: 100px; /* 최대 높이 설정 */
+    overflow-y: auto; /* 필요 시 수직 스크롤 표시 */
+}
+
+/*//////////////////////모달창////////////////////////////*/
+
+/* 모달 창 스타일 */
+#movieModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(80 87 81 / 80%)
+}
+
+/* 모달 창 콘텐츠 스타일 */
+.modal-content {
+    /*background-color:rgba(0,199,60,0.5);*/   /*모달창의 테두리쪽*/
+    background-color:rgb(106 169 134 / 50%);   /*모달창의 테두리쪽*/
+    color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #444;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px; /* 최대 너비 설정 */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 닫기 버튼 스타일 */
+.close {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #ff4081;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 상세 정보 스타일 */
+.movie-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: 'Arial', sans-serif;
+    background: white; /*모달창의 안쪽 부분*/
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.movie-info p {
+    margin: 10px 0;
+    color: black;
+    font-size: 1.1em;
+}
+
+.movie-info p:first-child {
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ff4081;
+}
+
+/* 영화 포스터 스타일 */
+.movie-info img {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 추가된 스타일 */
+.movie-info h2 {
+    font-size: 1.8em;
+    color: #ff4081;
+    margin: 10px 0;
+}
+
+/* 추가된 스타일 */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1d9500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #5aaf27;
+}

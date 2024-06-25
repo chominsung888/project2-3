@@ -2,6 +2,7 @@ package org.spring.codingStory.board.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.spring.codingStory.board.employee.dto.EmployeeDto;
 import org.spring.codingStory.contraint.BaseTimeEntity;
 import org.spring.codingStory.member.entity.MemberEntity;
 
@@ -23,7 +24,7 @@ public class EmployeeEntity extends BaseTimeEntity {
     private Long id;
 
     @Column(nullable = false)
-    public Long category;
+    private String category;
 
     @Column(nullable = false)
     private String empTitle;
@@ -31,11 +32,11 @@ public class EmployeeEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private String empContent;
 
-    @Column(columnDefinition = "integer default 0", nullable = false)
-    private int empHit;
+    @Column(nullable = false)
+    private String empWriter;
 
     @Column(columnDefinition = "integer default 0", nullable = false)
-    private int replyCount;
+    private int empHit;
 
     @Column(nullable = false)
     private int empAttachFile;
@@ -57,6 +58,62 @@ public class EmployeeEntity extends BaseTimeEntity {
             , cascade = CascadeType.REMOVE)
     private List<EmployeeReplyEntity> employeeReplyEntityList;
 
+
+    public static EmployeeEntity toInsertEmpEntity(EmployeeDto empDto) {
+        EmployeeEntity empEntity=new EmployeeEntity();
+        empEntity.setId(empDto.getId());
+        empEntity.setEmpContent(empDto.getEmpContent());
+        empEntity.setEmpTitle(empDto.getEmpTitle());
+        empEntity.setCategory(empDto.getCategory());
+        empEntity.setEmpWriter(empDto.getEmpWriter());
+        empEntity.setEmpHit(0);
+        empEntity.setEmpAttachFile(0);
+        empEntity.setMemberEntity(empDto.getMemberEntity());
+
+        return empEntity;
+
+    }
+
+    public static EmployeeEntity toInsertFileEmpEntity(EmployeeDto empDto) {
+
+        EmployeeEntity empEntity=new EmployeeEntity();
+        empEntity.setId(empDto.getId());
+        empEntity.setEmpContent(empDto.getEmpContent());
+        empEntity.setEmpTitle(empDto.getEmpTitle());
+        empEntity.setCategory(empDto.getCategory());
+        empEntity.setEmpWriter(empDto.getEmpWriter());
+        empEntity.setEmpHit(0);
+        empEntity.setEmpAttachFile(1);
+        empEntity.setMemberEntity(empDto.getMemberEntity());
+
+        return empEntity;
+
+    }
+
+    public static EmployeeEntity toUpdateEmpEntity(EmployeeDto empDto) {
+        EmployeeEntity empEntity=new EmployeeEntity();
+        empEntity.setId(empDto.getId());
+        empEntity.setEmpContent(empDto.getEmpContent());
+        empEntity.setEmpTitle(empDto.getEmpTitle());
+        empEntity.setCategory(empDto.getCategory());
+        empEntity.setEmpWriter(empDto.getEmpWriter());
+        empEntity.setEmpAttachFile(0);
+        empEntity.setMemberEntity(empDto.getMemberEntity());
+        return empEntity;
+
+    }
+    public static EmployeeEntity toUpdateFileEmpEntity(EmployeeDto empDto) {
+        EmployeeEntity empEntity=new EmployeeEntity();
+        empEntity.setId(empDto.getId());
+        empEntity.setEmpContent(empDto.getEmpContent());
+        empEntity.setEmpTitle(empDto.getEmpTitle());
+        empEntity.setCategory(empDto.getCategory());
+        empEntity.setEmpWriter(empDto.getEmpWriter());
+        empEntity.setEmpAttachFile(1);
+        empEntity.setMemberEntity(empDto.getMemberEntity());
+
+        return empEntity;
+    }
 
 
 }

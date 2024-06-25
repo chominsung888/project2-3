@@ -1,0 +1,59 @@
+ #content {
+      width: 80vw;
+      text-align: center;
+      margin: 0 auto
+    }
+
+    h1.title {
+      text-align: center;
+      background: linear-gradient(to right, #CEFF7F, #8AF7FF, #CD8FFF);
+      color: rgb(253, 253, 253);
+      padding: 10px 0;
+    }
+
+    #calendar {
+      width: 80vw;
+      height: 80vh;
+      margin: 0 auto
+    }
+
+    #calendarBox {
+      width: 70%;
+      padding-left: 15%;
+      color: #cd8fff;
+    }
+
+
+
+    .fc-col-header-cell.fc-day-sun .fc-col-header-cell-cushion {
+        color: red !important;
+    }
+    .fc-col-header-cell.fc-day-sat .fc-col-header-cell-cushion {
+            color: blue !important;
+        }
+
+    .fc-day-sat a {
+        color: blue !important;; /* 모든 토요일 날짜의 텍스트 색상을 파란색으로 설정 */
+    }
+    .fc-day-sun a {
+            color: red !important;; /* 모든 토요일 날짜의 텍스트 색상을 파란색으로 설정 */
+    }
+
+
+    .fc-event-main{
+      background: linear-gradient(to right, #FFD166, #06D6A0, #118AB2);
+      border-color: bisque;
+      color: black;
+    }
+    .fc-event-main-frame{
+      border-color: #ff65cc;
+    }
+    .fc-event-tilte{
+      color: wheat;
+    }
+    .fc-daygrid-day-number {
+      color: red; /* 날짜 텍스트 색상을 빨간색으로 설정 */
+  }
+
+   
+

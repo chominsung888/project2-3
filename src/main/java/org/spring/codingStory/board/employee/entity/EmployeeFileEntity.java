@@ -2,6 +2,7 @@ package org.spring.codingStory.board.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.spring.codingStory.board.employee.dto.EmployeeFileDto;
 import org.spring.codingStory.contraint.BaseTimeEntity;
 
 import javax.persistence.*;
@@ -30,5 +31,12 @@ public class EmployeeFileEntity extends BaseTimeEntity {
     @JoinColumn(name = "employee_id")
     private EmployeeEntity employeeEntity;
 
+    public static EmployeeFileEntity toInsertEmpFile(EmployeeFileDto empFileDto) {
+        EmployeeFileEntity empFileEntity=new EmployeeFileEntity();
+        empFileEntity.setEmpNewFileName(empFileDto.getEmpNewFileName());
+        empFileEntity.setEmpOldFileName(empFileDto.getEmpOldFileName());
+        empFileEntity.setEmployeeEntity(empFileDto.getEmployeeEntity());
 
+        return empFileEntity;
+    }
 }

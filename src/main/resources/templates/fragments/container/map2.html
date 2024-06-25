@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="map2Fragment">
+  <div class="right-con">
+    <div class="right-top">
+      <div class="gnb">
+        <ul>
+            <th:block sec:authorize="isAnonymous()">
+                <li><a th:href="@{/member/login}">로그인</a></li>
+                <li><a th:href="@{/member/join}">회원가입</a></li>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="myInfo" th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                  <li>
+                <p th:text="${#authentication.principal.department}"></p>부
+                  </li>
+                  <li>
+                <p th:text="${#authentication.principal.mRank}"></p>
+                  </li>
+                  <li>
+                <p th:text="${#authentication.principal.name}"></p>님
+                  </li>
+                </div>
+                <li><a th:href="@{/logout}">로그아웃</a></li>
+            </th:block>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+        <div class="hh">
+            <h1><a th:href="@{/map}">본점</a></h1>
+            <h1><a th:href="@{/map1}">노원점</a></h1>
+            <h1><a th:href="@{/map2}">자동차관</a></h1>
+            <h1><a th:href="@{/map3}">야외관</a></h1>
+            <h1><a th:href="@{/map4}">커플관</a></h1>
+        </div>
+      <div class="index-data">
+          <h1>자동차관오시는길</h1>
+          <div id="map2" style="width:100%;height:350px;"></div>
+          <script>
+              var mapContainer = document.getElementById('map2'), // 지도를 표시할 div
+                  mapOption = {
+                      center: new kakao.maps.LatLng(37.834876,126.735527), // 지도의 중심좌표
+                      level: 3 // 지도의 확대 레벨
+                  };
+
+              var map2 = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+              // 마커가 표시될 위치입니다
+              var markerPosition  = new kakao.maps.LatLng (37.834876,126.735527);
+
+              // 마커를 생성합니다
+              var marker = new kakao.maps.Marker({
+                  position: markerPosition
+              });
+
+              // 마커가 지도 위에 표시되도록 설정합니다
+              marker.setMap(map2);
+
+              // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+              // marker.setMap(null);
+          </script>
+          <div class="ct">
+
+              <table>
+                  <thead>
+
+                  </thead>
+                  <tbody>
+                  <tr>
+                      <th>주소</th>
+                      <td>
+                          <p class="txt1">- 경기도 파주시 탄현면 낙하리 265-12 (10857)</p>
+                          <p class="txt">- 697, LG-ro, Tanhyeon-myeon, Paju-si, Gyeonggi-do, Republic of Korea</p>
+                      </td>
+                  </tr>
+                  <tr>
+                      <th>대표전화</th>
+                      <td>031-945-0609</td>
+                  </tr>
+                  <tr>
+                      <th>E-mail</th>
+                      <td class="td3">
+                          <p class="txt">amigo678@naver.com</p>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

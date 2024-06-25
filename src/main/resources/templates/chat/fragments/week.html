@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Box Office Rankings</title>
+</head>
+<body>
+<div class="part" th:if="${msg.answer.infoList != null}" th:fragment="week">
+    <div class="box-office">
+        <h2 style="font-size: 15px;">주중의 박스오피스 순위입니다</h2>
+        <ul>
+            <li th:each="movie, index : ${msg.answer.infoList}">
+                <span th:text="${index.index + 1} + '. '"></span>
+                <span th:text="${movie.movieNm}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="part" th:unless="${msg.answer.infoList != null}">
+    <p>
+        순위를 찾을 수 없습니다.
+    </p>
+</div>
+
+</body>
+</html>

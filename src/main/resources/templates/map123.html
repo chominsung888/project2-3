@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>마커 생성하기</title>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ceb7c2ce8c4122181fed2db2c753ee12"></script>
+
+</head>
+<body>
+<h1>본사 오시는길</h1>
+<div id="map" style="width:100%;height:350px;"></div>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.51486,127.10318), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new kakao.maps.LatLng (37.51486,127.10318);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+    // marker.setMap(null);
+</script>
+<h1>노원점 오시는길</h1>
+<div id="map1" style="width:100%;height:350px;"></div>
+<script>
+    var mapContainer = document.getElementById('map1'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng( 37.654837,127.061187), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    var map1 = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new kakao.maps.LatLng (37.654837,127.061187);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map1);
+
+    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+    // marker.setMap(null);
+</script>
+<h1>자동차극장</h1>
+<div id="map2" style="width:100%;height:350px;"></div>
+<script>
+    var mapContainer = document.getElementById('map2'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.834876,126.735527), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    var map2 = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new kakao.maps.LatLng (37.834876,126.735527);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map2);
+
+    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+    // marker.setMap(null);
+</script>
+<h1>야외극장</h1>
+<div id="map3" style="width:100%;height:350px;"></div>
+<script>
+    var mapContainer = document.getElementById('map3'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.640776,127.007798), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    var map3 = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new kakao.maps.LatLng (37.640776,127.007798);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map3);
+
+    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+    // marker.setMap(null);
+</script>
+<h1>vip극장</h1>
+<div id="map4" style="width:100%;height:350px;"></div>
+<script>
+    var mapContainer = document.getElementById('map4'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.487455,127.047085), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    var map4 = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new kakao.maps.LatLng (37.487455,127.047085);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map4);
+
+    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+    // marker.setMap(null);
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 여기에 헤더 정보를 추가하세요 -->
+</head>
+<body>
+<div class="right" th:fragment="empUpdateFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="index-data">
+                    <div class="boardDetail">
+                        <div class="boardDetail-con">
+                            <div class="top">
+                                <div class="boardDetail-form">
+                                    <form th:action="@{/board/empUpdate}" method="post" enctype="multipart/form-data">
+                                        <div class="left-board">
+                                            <div class="left-board-con">
+                                                <th:block th:if="${emp.empAttachFile==1}"> <!--  이미지 표시 -->
+                                                    <img th:src="@{|/upload/${emp.empNewFileName}|}" alt="이미지대체문구">
+                                                </th:block>
+                                                <th:block th:unless="${emp.empAttachFile==1}">  <!--  이미지 표시 -->
+                                                    <img src="https://placehold.co/400x500?text=NOIMAGE" alt="이미지대체문구">
+                                                </th:block>
+                                            </div>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                수정게시판
+                                            </li>
+                                            <li>
+                                                <input type="hidden" name="id" id="id" th:value="${emp.id}" readonly>
+                                            </li>
+                                            <li>
+                                                <select name="category" id="category">
+                                                    <option value="본사">본사</option>
+                                                    <option value="노원점">노원점</option>
+                                                    <option value="자동차관">자동차관</option>
+                                                    <option value="야외관">야외관</option>
+                                                    <option value="커플관">커플관</option>
+                                                </select>
+                                            </li>
+                                            <li>
+                                                <label for="memberId">MemberId</label>
+                                                <input type="text" name="memberId" id="memberId" th:value="${emp.memberEntity.id}"
+                                                       readonly>
+                                            </li>
+                                            <li>
+                                                <label for="empTitle">TITLE</label>
+                                                <input type="text" name="empTitle" id="empTitle" th:value="${emp.empTitle}">
+                                            </li>
+                                            <li>
+                                                <label for="empContent">CONTENT</label>
+                                            </li>
+                                            <li>
+                                            <textarea name="empContent" id="empContent" cols="30" rows="3"
+                                                    th:text="${emp.empContent}"></textarea>
+                                            </li>
+
+                                            <li>
+                                                <label for="empHit">HIT</label>
+                                                <input type="text" name="empHit" id="empHit" th:value="${emp.empHit}" readonly>
+                                            </li>
+
+
+                                            <li>
+                                                <label for="empWriter">작성자</label>
+                                                <input type="text" name="empWriter" id="empWriter" th:value="${emp.empWriter}"
+                                                       readonly>
+                                            </li>
+                                            <li>
+                                                <label for="createTime">작성시간</label>
+                                                <input type="text"
+                                                       th:value="${#temporals.format(emp.createTime, 'yyyy-MM-dd HH:mm')}"
+                                                       id="createTime" readonly>
+                                            </li>
+                                            <li>
+                                                <label for="updateTime">수정시간</label>
+                                                <input type="text"
+                                                       th:value="${#temporals.format(emp.updateTime, 'yyyy-MM-dd HH:mm')}"
+                                                       id="updateTime" readonly>
+                                            </li>
+                                            <li>
+                                                <label for="boardFile">File</label>
+                                                <input type="file" name="boardFile" id="boardFile">
+                                            </li>
+                                            <li>
+
+                                                <th:block  sec:authorize="isAuthenticated()">
+                                                    <th:blcok style="display:flex;" th:if="${emp.memberEntity.userEmail==myUserDetails.username}">
+
+                                                        <input type="submit" value="수정" class="btn1">
+
+                                                        <a th:href="@{/board/empDelete/{id}(id=${emp.id})}" class="btn1">삭제</a>
+                                                        <a th:href="@{/board/empList}" class="btn1">목록</a>
+                                                    </th:blcok>
+                                                </th:block>
+
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

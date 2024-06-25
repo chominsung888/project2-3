@@ -1,0 +1,125 @@
+@import url(/css/common/reset.css);
+@import url(/css/common/left.css);
+
+.pagination a{
+color: #000;
+background-color: #dedfbc;
+border-radius: 5px;
+border: 1px solid #dedfbc99;
+margin: 0 5px;
+padding:0 5px;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* 오른쪽 스크롤 없애기 */
+}
+
+.bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* 변경: 세로 방향으로 정렬 */
+    align-items: center; /* 변경: 가운데 정렬 */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f1f1f100;
+    margin-top: 20px;
+}
+
+.attendanceWrite-con {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%; /* 변경: 전체 너비 사용 */
+    max-width: 800px;
+    background-color: #ffffff00; /* 배경색 제거 */
+}
+
+.attendanceWrite-form ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.attendanceWrite-form li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f1f100;
+}
+
+.attendanceWrite-form label {
+    flex: 1;
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.attendanceWrite-form input[type="text"] {
+    flex: 2;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.attendanceWrite-form input[type="button"] {
+    margin-right: 1000px;
+    flex: 1;
+    padding: 5px;
+    background-color: #3e688894;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 10px; /* 버튼과 텍스트 필드 사이의 간격 */
+}
+
+.attendanceWrite-form input[type="button"]:hover {
+    background-color: #007b5e;
+}
+
+.attendanceList table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff00;
+}
+
+.attendanceList th, .attendanceList td {
+    padding: 12px 15px;
+    /*border: 1px solid #f1f1f100;*/
+    text-align: center;
+
+    border-bottom: 1px solid #000;
+}
+
+.attendanceList thead tr {
+    background-color: #3e688894;
+    color: #000;
+}
+
+.attendanceList tbody tr:nth-of-type(even) {
+    background-color: #f1f1f100;
+}
+
+.attendanceList tbody tr:hover {
+    background-color: #f1f1f100;
+}
+
+.attendanceList tbody tr:last-of-type {
+    border-bottom: 2px solid #f1f1f100;
+}
+
+#pagination {
+    margin-top: 20px;
+    text-align: center;
+    color: black; /* 변경: 검정색 글씨 */
+}

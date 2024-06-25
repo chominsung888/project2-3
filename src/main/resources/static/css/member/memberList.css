@@ -1,0 +1,95 @@
+@import url(/css/common/reset.css);
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+.list{
+}
+.list .list-con{
+}
+
+form{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:50px;
+padding:10px;
+}
+
+button{
+font-family: "Noto Sans KR", sans-serif;
+border:0;
+border-radius:5px;
+background-color: rgb(62 104 136 / 58%);
+width:100px;
+height:40px;
+cursor:pointer;
+color:#ffffff;
+font-weight:bold;
+font-size: 17px;
+}
+
+
+table img{
+width:50px;
+height:50px;
+background-color:#ffffff;
+}
+
+table{
+width:98%;
+border-collapse: collapse;
+table-layout:fixed;
+}
+table th{
+height:40px;
+    background-color: rgb(62 104 136 / 58%);
+    color:#ffffff;
+}
+
+table tbody td{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align:center;
+    height:50px;
+    vertical-align: top;
+    line-height: 50px;
+    table-layout:fixed;
+    padding:5px;
+}
+
+table tbody tr{
+cursor:pointer;
+height:50px;
+    table-layout:fixed;
+}
+table tbody tr:hover{
+background-color:rgb(222 223 188);
+}
+
+.paging ul{
+display:flex;
+gap:20px;
+padding-top:20px;
+
+}
+.paging ul>li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.now{
+border:1px solid;
+}
+
+.paging a{
+color:#fff;
+}
+.paging span{
+color:#fff;
+width:20px;
+text-align:center;
+}
+
+
+

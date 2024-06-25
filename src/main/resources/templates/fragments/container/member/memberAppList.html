@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="memberAppListRightFragment">
+  <div class="right-con">
+    <div class="right-top">
+      <div class="gnb">
+        <ul>
+          <th:block sec:authorize="isAuthenticated()">
+            <div class="myInfo"
+                 th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+              <li>
+                <a th:text="${#authentication.principal.department}"></a>
+                <a th:text="${#authentication.principal.mRank}"></a>
+                <a th:text="${#authentication.principal.name}"></a>
+                <p>님</p>
+              </li>
+            </div>
+            <li>
+
+            </li>
+            <li><a th:href="@{/logout}">로그아웃</a></li>
+          </th:block>
+          <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+            <a th:href="@{/my/schedule}">Fullcalendar</a>
+          </li>
+          <li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="index-data">
+        <p>가입대기자 :[[${total}]] 명</p>
+        <h1>[[${first}]]</h1>
+        <input type="hidden" th:value="${total}" id="total">
+        <input type="hidden" value="-1" id="i">
+
+
+        <div class="list">
+          <div class="list-left">
+            <li>
+              <input type="hidden" th:value="${memberDto.pageable.pageNumber-1}" id="before">
+
+              <button onclick="pageBeforeFn()" id="pageBeforeBtn">◀</button>
+            </li>
+          </div>
+
+          <div class="list-center" th:each="member :${memberDto}">
+            <div class="center-top">
+              <div class="info createTime">
+                <label for="createTime">신청일</label>
+                <span th:text="${#temporals.format(member.createTime, 'yy년MM월dd일 HH시mm분')}" id="createTime"
+                      name="createTime"></span>
+              </div>
+              <th:block th:if="${member.memberAttachFile==1}">
+                <img th:src="@{|/upload/${member.memberNewFileName}|}" alt="이미지대체문구">
+              </th:block>
+              <th:block th:unless="${member.memberAttachFile==1}">
+                <img th:src="@{/images/memberProfile.png}" alt="이미지대체문구">
+              </th:block>
+
+            </div>
+            <div class="center-bottom">
+              <input type="hidden" th:value="${member.role}" id="role" name="role">
+              <input type="hidden" th:value="${member.id}" id="id" name="id">
+
+
+              <div class="firstInfo">
+                <div class="info userEmail">
+                  <label for="userEmail">이메일</label>
+                  <span th:text="${member.userEmail}" id="userEmail" name="userEmail"></span>
+                </div>
+                <div class="info name">
+                  <label for="name">이름</label>
+                  <span th:text="${member.name}" id="name" name="name"></span>
+                </div>
+              </div>
+
+
+              <div class="secondInfo">
+                <div class="info phoneNumber">
+                  <label for="phoneNumber">전화번호</label>
+                  <span th:text="${member.phoneNumber}" id="phoneNumber" name="phoneNumber"></span>
+                </div>
+                <div class="info address">
+                  <label for="address">주소</label>
+                  <span th:text="${member.address}" id="address" name-="address"></span>
+                </div>
+              </div>
+
+              <div class="thirdInfo">
+                <div class="info department">
+                  <label for="department">부서</label>
+                  <select id="department" name="department">
+                    <option th:each="de : ${depart}" th:value="${de.dptName}"
+                            th:text="${de.dptName}">
+                    </option>
+                  </select>
+                </div>
+                <div class="info mRank">
+                  <label for="mRank">직급</label>
+                  <select id="mRank" name="mRank">
+                    <option th:each="re : ${rank}" th:value="${re.rankName}"
+                            th:text="${re.rankName}">
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="list-right">
+            <input type="hidden" th:value="${memberDto.pageable.pageNumber+1}" id="next">
+            <li>
+              <button onclick="pageNextFn()" id="pageNextBtn">▶</button>
+            </li>
+          </div>
+        </div>
+
+
+        <div class="down">
+          <li th:each="i: ${#numbers.sequence(startPage, endPage)}" class="block">
+            <span th:if="${i==memberDto.pageable.pageNumber+1}" class="now">●</span>
+            <a th:unless="${i== memberDto.pageable.pageNumber+1}"
+               th:href="@{/member/memberAppList(page=${i - 1})}">○</a>
+          </li>
+        </div>
+          <div class="gogo">
+            <button onClick="memberAppOkFn()">승인</button>
+            <button onClick="memberAppNoReady()">거절</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

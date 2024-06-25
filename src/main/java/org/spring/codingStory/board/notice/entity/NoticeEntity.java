@@ -2,7 +2,7 @@ package org.spring.codingStory.board.notice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
+import org.spring.codingStory.board.notice.dto.NoticeDto;
 import org.spring.codingStory.contraint.BaseTimeEntity;
 import org.spring.codingStory.member.entity.MemberEntity;
 
@@ -24,7 +24,7 @@ public class NoticeEntity extends BaseTimeEntity {
     private Long id;
 
     @Column(nullable = false)
-    public Long category;
+    public String category;
 
     @Column(nullable = false)
     private String noticeTitle;
@@ -35,8 +35,8 @@ public class NoticeEntity extends BaseTimeEntity {
     @Column(columnDefinition = "integer default 0", nullable = false)
     private int noticeHit;
 
-    @Column(columnDefinition = "integer default 0", nullable = false)
-    private int replyCount;
+    @Column(nullable = false)
+    private String noticeWriter;
 
     @Column(nullable = false)
     private int noticeAttachFile;
@@ -58,6 +58,62 @@ public class NoticeEntity extends BaseTimeEntity {
             , cascade = CascadeType.REMOVE)
     private List<NoticeReplyEntity> noticeReplyEntityList;
 
+    public static NoticeEntity toInsertNoticeEntity(NoticeDto noticeDto) {
+        NoticeEntity noticeEntity=new NoticeEntity();
+        noticeEntity.setId(noticeDto.getId());
+        noticeEntity.setNoticeContent(noticeDto.getNoticeContent());
+        noticeEntity.setNoticeTitle(noticeDto.getNoticeTitle());
+        noticeEntity.setCategory(noticeDto.getCategory());
+        noticeEntity.setNoticeWriter(noticeDto.getNoticeWriter());
+        noticeEntity.setNoticeHit(0);
+        noticeEntity.setNoticeAttachFile(0);
+        noticeEntity.setMemberEntity(noticeDto.getMemberEntity());
+
+        return noticeEntity;
+
+    }
+
+    public static NoticeEntity toInsertFileNoticeEntity(NoticeDto noticeDto) {
+
+        NoticeEntity noticeEntity=new NoticeEntity();
+        noticeEntity.setId(noticeDto.getId());
+        noticeEntity.setNoticeContent(noticeDto.getNoticeContent());
+        noticeEntity.setNoticeTitle(noticeDto.getNoticeTitle());
+        noticeEntity.setCategory(noticeDto.getCategory());
+        noticeEntity.setNoticeWriter(noticeDto.getNoticeWriter());
+        noticeEntity.setNoticeHit(0);
+        noticeEntity.setNoticeAttachFile(1);
+        noticeEntity.setMemberEntity(noticeDto.getMemberEntity());
+
+        return noticeEntity;
+
+    }
+
+    public static NoticeEntity toUpdateNoticeEntity(NoticeDto noticeDto) {
+        NoticeEntity noticeEntity=new NoticeEntity();
+        noticeEntity.setId(noticeDto.getId());
+        noticeEntity.setNoticeContent(noticeDto.getNoticeContent());
+        noticeEntity.setNoticeTitle(noticeDto.getNoticeTitle());
+        noticeEntity.setCategory(noticeDto.getCategory());
+        noticeEntity.setNoticeWriter(noticeDto.getNoticeWriter());
+        noticeEntity.setNoticeAttachFile(0);
+        noticeEntity.setMemberEntity(noticeDto.getMemberEntity());
+
+        return noticeEntity;
+
+    }
+    public static NoticeEntity toUpdateFileNoticeEntity(NoticeDto noticeDto) {
+        NoticeEntity noticeEntity=new NoticeEntity();
+        noticeEntity.setId(noticeDto.getId());
+        noticeEntity.setNoticeContent(noticeDto.getNoticeContent());
+        noticeEntity.setNoticeTitle(noticeDto.getNoticeTitle());
+        noticeEntity.setCategory(noticeDto.getCategory());
+        noticeEntity.setNoticeWriter(noticeDto.getNoticeWriter());
+        noticeEntity.setNoticeAttachFile(1);
+        noticeEntity.setMemberEntity(noticeDto.getMemberEntity());
+
+        return noticeEntity;
+    }
 
 
 }

@@ -1,8 +1,8 @@
 package org.spring.codingStory.board.notice.dto;
 
 import lombok.*;
-import org.spring.codingStory.board.freeBoard.entity.FreeEntity;
 import org.spring.codingStory.board.notice.entity.NoticeEntity;
+import org.spring.codingStory.board.notice.entity.NoticeReplyEntity;
 
 import java.time.LocalDateTime;
 
@@ -27,5 +27,15 @@ public class NoticeReplyDto {
 
     private LocalDateTime updateTime;
 
+    public static NoticeReplyDto toSelectReplyDto(NoticeReplyEntity noticeReplyEntity) {
+        NoticeReplyDto noticeReplyDto=new NoticeReplyDto();
+        noticeReplyDto.setId(noticeReplyEntity.getId());
+        noticeReplyDto.setNoticeReplyContent(noticeReplyEntity.getNoticeReplyContent());
+        noticeReplyDto.setNoticeEntity(noticeReplyEntity.getNoticeEntity());
+        noticeReplyDto.setNoticeReplyWriter(noticeReplyEntity.getNoticeReplyWriter());
+        noticeReplyDto.setCreateTime(noticeReplyEntity.getCreateTime());
+        noticeReplyDto.setUpdateTime(noticeReplyEntity.getUpdateTime());
 
+        return noticeReplyDto;
+    }
 }

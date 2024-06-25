@@ -1,6 +1,9 @@
 server:
   port: 8095
 
+navar.api.client-id:  bkkWFCLHCqDi68L8xRI8
+navar.api.client-secret:  wMYmrGYOYR
+
 #Spring ??
 spring:
   datasource:
@@ -21,7 +24,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create #drop, create, update
+
+      ddl-auto: update # update, create, drop
+
     properties:
       hibernate:
         show_sql: true #SQL ???? ???
@@ -39,5 +44,14 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
 
-filePath: file:///c:/codingStory/
+filePath: file:///c:/codingStory_file/
+
+
+tmdb:
+  api:
+    key: ba65bca7bd473078269aa9976068045a
+
+kofic:
+  api:
+    key: a00c456adf2ded3c39df93f44cf40503
 

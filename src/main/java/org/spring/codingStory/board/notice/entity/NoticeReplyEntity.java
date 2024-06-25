@@ -2,7 +2,6 @@ package org.spring.codingStory.board.notice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.spring.codingStory.board.freeBoard.entity.FreeEntity;
 import org.spring.codingStory.contraint.BaseTimeEntity;
 
 import javax.persistence.*;

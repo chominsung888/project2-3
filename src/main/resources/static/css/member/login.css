@@ -1,0 +1,141 @@
+@import url(/css/common/parkReset.css);
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+.container {
+  width: 100%;
+  height:100%;
+  background:url(/images/movieLogin.jpg) no-repeat 50%;
+  background-size: cover;
+  font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+input:focus {
+outline:none;
+}
+input::placeholder{
+font-weight:600;
+color:#8e8e8e;
+}
+
+.login {
+  list-style-type: none;
+  width: 100%;
+  min-height: calc(100vh - 70px - 150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+}
+
+.login .login-con {
+width: 580px;
+margin: 40px auto 42px;
+padding: 0 69px;
+font-size: 12px;
+box-sizing: border-box;
+}
+.login-con form{
+}
+.login-con form ul{
+padding:55px 0;
+line-height:40px;
+}
+.login-con form ul>li{
+
+}
+.loginInput{
+display: flex;
+flex-direction: column;
+gap:10px;
+}
+.loginInput input{
+font-family: "Noto Sans KR", sans-serif;
+border: 0;
+height: 45px;
+border-bottom: 2px solid #ccc;
+font-size: 18px;
+color: #191919;
+box-sizing: border-box;
+padding:10px;
+}
+.loginBtn{
+display:flex;
+justify-content:center;
+padding:20px 0;
+}
+.loginBtn button{
+font-family: "Noto Sans KR", sans-serif;
+cursor: pointer;
+border: 0;
+width: 100%;
+height: 50px;
+background-color: #ccc;
+border-radius: 4px;
+font-size: 16px;
+font-weight:bold;
+}
+.account{
+display:flex;
+justify-content:space-between;
+}
+.account a{
+font-size: 14px;
+}
+
+.find{
+display:flex;
+gap:10px;
+}
+
+
+.sns{
+}
+
+.sns a img{
+width:200px;
+height:50px;
+}
+.sns-con{
+display:flex;
+gap:20px;
+}
+.kakao{
+}
+.naver{
+display: flex;
+padding-right: 15px;
+}
+
+.google2{
+display:flex;
+align-items:center;
+    width: 200px;
+    height: 50px;
+    background-color: #4184f3;
+border-radius:4px;
+cursor:pointer;
+}
+.google2 ul{
+display: flex;
+    text-align: center;
+    align-items: center;
+}
+.google2 ul>li{
+}
+.google2 img{
+display:flex;
+    height: 35px;
+    padding-left: 5px;
+}
+.google2 p{
+padding-left: 25px;
+    color: #ffffff;
+    font-size:18px;
+}
+
+.logout{
+}
+.logout a{
+}
+

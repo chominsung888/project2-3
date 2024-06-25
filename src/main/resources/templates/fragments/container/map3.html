@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="map3Fragment">
+  <div class="right-con">
+    <div class="right-top">
+      <div class="gnb">
+        <ul>
+            <th:block sec:authorize="isAnonymous()">
+                <li><a th:href="@{/member/login}">로그인</a></li>
+                <li><a th:href="@{/member/join}">회원가입</a></li>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="myInfo" th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                  <li>
+                <p th:text="${#authentication.principal.department}"></p>부
+                  </li>
+                  <li>
+                <p th:text="${#authentication.principal.mRank}"></p>
+                  </li>
+                  <li>
+                <p th:text="${#authentication.principal.name}"></p>님
+                  </li>
+                </div>
+                <li><a th:href="@{/logout}">로그아웃</a></li>
+            </th:block>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+        <div class="hh">
+            <h1><a th:href="@{/map}">본점</a></h1>
+            <h1><a th:href="@{/map1}">노원점</a></h1>
+            <h1><a th:href="@{/map2}">자동차관</a></h1>
+            <h1><a th:href="@{/map3}">야외관</a></h1>
+            <h1><a th:href="@{/map4}">커플관</a></h1>
+        </div>
+      <div class="index-data">
+          <h1>야외관오시는길</h1>
+          <div id="map3" style="width:100%;height:350px;"></div>
+          <script>
+              var mapContainer = document.getElementById('map3'), // 지도를 표시할 div
+                  mapOption = {
+                      center: new kakao.maps.LatLng(37.62152,127.038493), // 지도의 중심좌표
+                      level: 3 // 지도의 확대 레벨
+                  };
+
+              var map3 = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+              // 마커가 표시될 위치입니다
+              var markerPosition  = new kakao.maps.LatLng (37.62152,127.038493);
+
+              // 마커를 생성합니다
+              var marker = new kakao.maps.Marker({
+                  position: markerPosition
+              });
+
+              // 마커가 지도 위에 표시되도록 설정합니다
+              marker.setMap(map3);
+
+              // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+              // marker.setMap(null);
+          </script>
+          <div class="ct">
+
+              <table>
+                  <thead>
+
+                  </thead>
+                  <tbody>
+                  <tr>
+                      <th>주소</th>
+                      <td>
+                          <p class="txt1">- 서울특별시 강북구 월계로 173 (번동) 북서울꿈의숲</p>
+                          <p class="txt">- 	173, Wolgye-ro, Gangbuk-gu, Seoul, Republic of Korea</p>
+                      </td>
+                  </tr>
+                  <tr>
+                      <th> 지하철</th>
+                      <td>
+                      <p class="txt1" style="color: blue;">- 4호선</p>
+                      <p class="txt1">- 미아사거리역 1번 출구 →롯데백화점 주차장 출구 맞은편 정류장 (09771)에서 강북05번 승차→ 북서울꿈의숲(서문) 하차</p>
+                      <p class="txt1">-  미아사거리역 3번 출구 → 1124번 승차 →북서울꿈의숲(서문) 하차</p>
+                      <p class="txt1" style="color: brown;">- 6호선</p>
+                      <p class="txt">- 돌곶이역 3번 출구→ 147번승차 → 북서울꿈의숲(동문) 하차</p>
+                      </td>
+                  </tr>
+                  <tr>
+                      <th>버스</th>
+                      <td class="td3">
+                          <p class="txt1">- 간선버스(파랑버스) / 147,149(동문)</p>
+                          <p class="txt1">- 지선버스(초록버스) / 1124번(서문)</p>
+                          <p class="txt">-  마을버스 / 강북05번(서문),강북09번(동문), 강북11번(동문),성북14번(동문)</p>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

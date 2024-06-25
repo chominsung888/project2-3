@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<div class="part" th:if="${msg.answer.temp != null}" th:fragment="tempFragment">
+  <p>
+    <span th:text="${msg.answer.temp.weatherName}" hidden></span>
+    현재기온: <span th:text="${msg.answer.temp.temp}-273.15"></span>&deg;C <br>
+    최고기온: <span th:text="${msg.answer.temp.tempMax}-273.15"></span>&deg;C
+  </p>
+
+  <div th:if="${msg.answer.temp.tempMax}-273.15 >= 30">
+    <p>할인: 해당 지점의 오늘 최고 기온이 30도 이상입니다!</p>
+  </div>
+
+
+</div>
+<div class="part" th:if="${msg.answer.temp == null}">
+  <p>
+    db에 없는 지역입니다.
+  </p>
+</div>
+</html>

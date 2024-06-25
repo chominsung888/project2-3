@@ -21,4 +21,6 @@ public class BaseTimeEntity {
     @UpdateTimestamp
     @Column(insertable = false)
     private LocalDateTime updateTime;
+
+
 }

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<div class="left" th:fragment="indexLeftFragment">
+    <div class="left-con">
+        <div class="left-top">
+            <div class="title">
+                <h1 class="logo">
+                    <a th:href="@{/index}"><img th:src="@{/images/logo.png}" alt=""> </a>
+                </h1>
+            </div>
+            <div class="left-menu">
+                <ul>
+                    <!-- 사원관리 메뉴 -->
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li class="sub">
+                            <img th:src="@{/images/emp.png}" alt="icon">
+                            <div class="right">
+                                <h3>사원관리</h3>
+                                <ul class="submenu">
+                                    <li th:onClick="|location.href='@{/member/memberList}'|">
+                                        <a>사원목록</a>
+                                    </li>
+                                    <li th:onClick="|location.href='@{/member/memberAppList}'|">
+                                        <a>가입승인</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </th:block>
+                    <!-- 기타 메뉴들 -->
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li class="menuGo" th:onClick="|location.href='@{/department/department}'|"><img th:src="@{/images/depart.png}" alt="icon"><a>부서관리</a></li>
+                    </th:block>
+                    <li class="menuGo" th:onClick="|location.href='@{/pay}'|"><img th:src="@{/images/pay.png}" alt="icon"><a>급여관리</a></li>
+                    <li class="menuGo" th:onClick="|location.href='@{/attendance}'|"><img th:src="@{/images/add.png}" alt="icon"><a>근태관리</a></li>
+                    <!-- 게시판 메뉴 -->
+                    <li class="sub">
+                        <img th:src="@{/images/board.png}" alt="icon">
+                        <div class="right">
+                            <h3>게시판</h3>
+                            <ul class="submenu">
+                                <li th:onClick="|location.href='@{/board/noticeList}'|">
+                                    <a>공지사항</a>
+                                </li>
+                                <li th:onClick="|location.href='@{/board/freeList}'|">
+                                    <a>자유게시판</a>
+                                </li>
+                                <li th:onClick="|location.href='@{/board/empList}'|">
+                                    <a>이달의사원</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menuGo" th:onClick="|location.href='@{/apv/list}'|"><img th:src="@{/images/app.png}" alt="icon"><a>결재관리</a></li>
+                    <li><img th:src="@{/images/sch.png}" alt="icon"><a href="#">전체일정</a></li>
+                    <li class="menuGo" th:onClick="|location.href='@{/chatbot/chatIndex}'|"><img th:src="@{/images/chat-bot.png}" alt="icon"><a>상담</a></li>
+                    <li class="menuGo" th:onClick="|location.href='@{/map}'|"><img th:src="@{/images/place.png}" alt="icon"><a>오시는길</a></li>
+                    <!-- 네이버 API 연동 메뉴 -->
+                    <li class="sub">
+                        <img th:src="@{/images/naver.png}" alt="icon">
+                        <div class="right">
+                            <h3>네이버</h3>
+                            <ul class="submenu">
+                                <li>
+                                    <form action="https://auth.worksmobile.com/oauth2/v2.0/authorize" method="get">
+                                        <input type="hidden" name="client_id" value="bkkWFCLHCqDi68L8xRI8">
+                                        <input type="hidden" name="redirect_uri" value="http://localhost:8095/naver/auth2">
+                                        <input type="hidden" name="scope" value="directory, directory.read, orgunit, orgunit.read, user, user.read">
+                                        <input type="hidden" name="response_type" value="code">
+                                        <input type="hidden" name="state" value="test">
+                                        <input type="submit" value="조직인증" class="naverBtn">
+                                    </form>
+                                </li>
+                                <li>
+                                    <form id="mail" onsubmit="window.open('https://mail.worksmobile.com/write/popup', '_blank', 'width=600, height=400,resizeable,scrollbars');">
+                                        <input type="submit" value="메일연동" class="naverBtn">
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sub">
+                        <img th:src="@{/images/naver.png}" alt="icon">
+                        <div class="right">
+                            <h3>날씨</h3>
+                            <ul class="submenu">
+
+
+                    <li class="menuGo"th:onClick="|location.href='@{/weather/weatherApiIndex}'|"><img th:src="@{/images/app.png}" alt="icon"><a>날씨api</a></li>
+                    <li class="menuGo"th:onClick="|location.href='@{/weather/index}'|"><img th:src="@{/images/app.png}" alt="icon"><a>챗봇</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sub">
+                        <img th:src="@{/images/movie.png}" alt="icon">
+                        <div class="right">
+                            <h3>영화</h3>
+                            <ul class="submenu">
+
+                                <li class="menuGo"th:onClick="|location.href='@{/movie/index1}'|"><img th:src="@{/images/movie.png}" alt="icon"><a>일일 박스오피스</a></li>
+                                <li class="menuGo"th:onClick="|location.href='@{/chat/index}'|"><img th:src="@{/images/app.png}" alt="icon"><a>챗봇</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li class="sub">
+                        <img th:src="@{/images/busicon.png}" alt="icon">
+                        <div class="right">
+                            <h3>버스</h3>
+                            <ul class="submenu">
+
+                                <li class="menuGo"th:onClick="|location.href='@{/busapi/bus/busIndex}'|"><img th:src="@{/images/bussub.png}" alt="icon"><a>버스API</a></li>
+                                <li class="menuGo"th:onClick="|location.href='@{/buschatbot/chat}'|"><img th:src="@{/images/bussub.png}" alt="icon"><a>버스챗봇</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            주소,저작권
+        </div>
+    </div>
+</div>
+</html>

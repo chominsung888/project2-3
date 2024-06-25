@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 여기에 헤더 정보를 추가하세요 -->
+</head>
+<body>
+<div class="right" th:fragment="freeListFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="index-data">
+                    <div class="boardList">
+                        <div class="boardList-con">
+                            <h1>자유게시판</h1>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <div class="search">
+                                        <div class="search-con">
+                                            <form th:action="@{/board/freeList}" method="get">
+                                                <select name="subject1" id="subject1">
+                                                    <option value="본사" th:selected="${param.subject1 == '본사'}">본사</option>
+                                                    <option value="노원점" th:selected="${param.subject1 == '노원점'}">노원점
+                                                    </option>
+                                                    <option value="자동차관" th:selected="${param.subject1 == '자동차관'}">자동차관
+                                                    </option>
+                                                    <option value="야외관" th:selected="${param.subject1 == '야외관'}">야외관
+                                                    </option>
+                                                    <option value="커플관" th:selected="${param.subject1 == '커플관'}">커플관
+                                                    </option>
+                                                </select>
+                                                <select name="subject2" id="subject2">
+                                                    <option value="freeTitle"
+                                                            th:selected="${param.subject2 == 'freeTitle'}">제목
+                                                    </option>
+                                                    <option value="freeContent"
+                                                            th:selected="${param.subject2 == 'freeContent'}">내용
+                                                    </option>
+                                                </select>
+                                                <input type="text" name="search" id="search" th:value="${param.search}">
+                                                <input type="submit" value="검색">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <th>글번호</th>
+                                    <th>지점</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>조회수</th>
+                                    <th>작성날짜</th>
+                                </tr>
+                                </thead>
+                                <tbody class="list">
+                                <tr th:each="free: ${freeList}">
+                                    <td th:text="${free.id}"></td>
+                                    <td th:text="${free.category}"></td>
+                                    <td class="btitle">
+                                        <a th:href="@{/board/freeDetail/{id}(id=${free.id})}">
+                                            <label th:text="${free.freeTitle}"></label>
+                                        </a>
+                                    </td>
+                                    <td th:text="${free.freeWriter}"></td>
+                                    <td th:text="${free.freeHit}"></td>
+                                    <td th:text="${#temporals.format(free.createTime, 'yyyy-MM-dd')}"></td>
+
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="7" class="tdPaging">
+                                        <div class="paging">
+                                            <ul>
+                                                <li>
+                                                    <!-- 현재페이지가  첫번째 페이지이면   span표시 -->
+                                                    <span th:if="${freeList.pageable.pageNumber + 1 eq 1}" class="span0">&laquo;</span>
+                                                    <!-- 처음 페이지가 아니면  a -->
+                                                    <span th:unless="${freeList.pageable.pageNumber + 1 eq 1}">
+                                                        <a th:href="@{/board/freeList(page=0, search=${param.search}, subject1=${param.subject1})}"
+                                                           class="span1">&laquo;</a>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <!-- 이전페이지가  첫번째 페이지이면   span표시 -->
+                                                    <span th:if="${1 == freeList.pageable.pageNumber + 1}" class="span0">&lt;</span>
+                                                    <span th:unless="${1 == freeList.pageable.pageNumber + 1}">
+                                                        <!-- itemList.pageable.pageNumber 현재페이지 -1 -->
+                                                        <a th:href="@{/board/freeList(page=${freeList.pageable.pageNumber - 1}, search=${param.search}, subject1=${param.subject1})}"
+                                                           class="span1">&lt;</a>
+                                                    </span>
+                                                </li>
+                                                <!-- block  -->
+                                                <!-- 페이지 번호 -->
+                                                <li th:each="i: ${#numbers.sequence(startPage, endPage)}" class="block">
+                                                    <span th:if="${i == freeList.pageable.pageNumber + 1}" th:text="${i}"
+                                                          class="now"></span>
+                                                    <a th:unless="${i == freeList.pageable.pageNumber + 1}"
+                                                       th:href="@{/board/freeList(page=${i - 1}, search=${param.search}, subject1=${param.subject1})}"
+                                                       th:text="${i}"></a>
+                                                </li>
+                                                <li>
+                                                    <!-- 현재페이지가 마지막 페이지이면   span표시 -->
+                                                    <span th:if="${freeList.totalPages == freeList.pageable.pageNumber + 1}"
+                                                          class="span0">&gt;</span>
+                                                    <!-- 현재페이지가 마지막 페이지아니면    a 표시 현재페이지 +1 -->
+                                                    <span th:unless="${freeList.totalPages == freeList.pageable.pageNumber + 1}">
+                                                        <a th:href="@{/board/freeList(page=${freeList.pageable.pageNumber + 1}, search=${param.search}, subject1=${param.subject1})}"
+                                                           class="span1">&gt;</a>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <!-- 현재페이지가 마지막 페이지이면   span표시 -->
+                                                    <span th:if="${freeList.totalPages == freeList.pageable.pageNumber + 1}"
+                                                          class="span0">&raquo;</span>
+                                                    <!-- 현재페이지가 마지막 페이지가 아니면 마지막 페이지로 이동 해라  a -->
+                                                    <span th:unless="${freeList.totalPages == freeList.pageable.pageNumber + 1}">
+                                                        <a th:href="@{/board/freeList(page=${freeList.totalPages - 1}, search=${param.search}, subject1=${param.subject1})}"
+                                                           class="span1">&raquo;</a>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <div class="writeButton">
+                                    <a th:href="@{/board/freeWrite}" class><img src="/images/btn_write.jpg" alt="글쓰기"></a>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 여기에 헤더 정보를 추가하세요 -->
+</head>
+<body>
+<div class="right" th:fragment="empDetailFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="index-data">
+                <div class="detail">
+                    <div class="detail-con">
+                        <div class="top">
+                            <h1>자유 게시판</h1>
+                            <ul>
+                                <li>
+                                    <div class="empTitle">
+                                        <span name="empTitle" id="empTitle" th:text="${emp.empTitle}"></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span th:text="${#temporals.format(emp.createTime, 'yyyy-MM-dd HH:mm')}" id="createTime"></span>
+                                </li>
+                            </ul>
+                            <ul>
+                            <li>
+                                <div class="title-right">
+                                    <img th:src="@{|/upload/${emp.memberEntity.memberFileName}|}"
+                                         alt="photo" height="32px">
+                                    <span name="empWriter" id="empWriter" th:text="${emp.empWriter}"></span>
+                                    <label for="empWriter"></label>
+                                </div>
+                            </li>
+                                <li>
+                                    <div class="category-right">
+                                        <label for="empHit">조회수</label>
+                                        <span name="empHit" id="empHit" th:text="${emp.empHit}"></span>
+                                    </div>
+                                    <div class="category">
+                                        <span th:if="${emp.category == '본사'}">본사</span>
+                                        <span th:if="${emp.category == '노원점'}">노원점</span>
+                                        <span th:if="${emp.category == '자동차관'}">자동차관</span>
+                                        <span th:if="${emp.category == '야외관'}">야외관</span>
+                                        <span th:if="${emp.category == '커플관'}">커플관</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="detail-form">
+                                <img th:if="${emp.empAttachFile==1}" th:src="@{|/upload/${emp.empNewFileName}|}" alt="이미지대체문구">
+                                <img th:unless="${emp.empAttachFile==1}" src="https://placehold.co/600x400?text=NOIMAGE" alt="이미지대체문구">
+                            </div>
+                        </div>
+                        <div class="bottom1">
+                            <ul>
+                                <li>
+                                    <textarea name="empContent" id="empContent" cols="30" rows="3"
+                                              th:text="${emp.empContent}" disabled></textarea>
+                                </li>
+                                <li>
+                                    <input type="hidden" name="memberId" id="memberId" th:value="${emp.memberEntity.id}">
+                                </li>
+
+                                <li>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <th:block th:if="${emp.memberEntity.userEmail==myUserDetails.username}">
+                                            <a th:href="@{/board/empUpdate/{id}(id=${emp.id})}" class="btn2">수정</a>
+                                        </th:block>
+                                    </th:block>
+                                </li>
+                                <li>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <th:block th:unless="${emp.memberEntity.userEmail==myUserDetails.username}">
+                                            <input type="hidden" id="memberId2" th:value="${myUserDetails.memberEntity.id}">
+                                            <a th:href="@{/board/empList}" class="btn1">목록</a>
+                                        </th:block>
+                                    </th:block>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 댓글 -->
+                <div class="bottom2">
+                    <div class="reply">
+                        <div class="reply-con">
+                            <h1>댓글</h1>
+
+                            <th:block sec:authorize="isAuthenticated()">
+                                <form th:action="@{/reply/empReplyWrite}" method="post">
+                                    <input type="hidden" id="employeeId" name="employeeId" th:value="${emp.id}" readonly>
+                                    <input type="hidden" name="empReplyId">
+                                    <input type="text" name="empReplyWriter" id="empReplyWriter"
+                                           th:value="${myUserDetails.name}" class="writer" readonly>
+                                    <input type="text" name="empReplyContent" id="empReplyContent"
+                                           placeholder="덧글내용" style="width: 500px; background-color:#ccc;">
+                                    <input type="submit" value="댓글작성">
+                                </form>
+                            </th:block>
+
+                            <th:block sec:authorize="isAnonymous()">
+                                <h1>댓글을 작성하려면 <a th:href="@{/member/memberLogin}" class="login">로그인</a> 하세요!</h1>
+                            </th:block>
+
+                            <!-- 댓글 테이블 -->
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>작성자</th>
+                                    <th>내용</th>
+                                    <th>작성시간</th>
+                                </tr>
+                                </thead>
+                                <tbody class="tData">
+                                <tr th:each="empReply : ${employeeReplyDtoList}">
+                                    <td th:text="${empReply.empReplyWriter}"></td>
+                                    <td th:text="${empReply.empReplyContent}"></td>
+                                    <td th:text="${#temporals.format(empReply.createTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                            <td>
+                                                <a th:href="@{/reply/empReplyDelete/{id}(id=${empReply.id})}">삭제</a>
+                                            </td>
+                                        </th:block>
+                                        <th:block th:if="${emp.memberEntity.userEmail==myUserDetails.username} or ${empReply.empReplyWriter==myUserDetails.name}">
+                                            <th:block sec:authorize="hasAnyRole('MEMBER','MANAGER')">
+                                                <td>
+                                                    <a th:href="@{/reply/empReplyDelete/{id}(id=${empReply.id})}">삭제</a>
+                                                </td>
+                                            </th:block>
+                                        </th:block>
+                                    </th:block>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

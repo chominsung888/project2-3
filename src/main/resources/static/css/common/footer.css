@@ -1,0 +1,18 @@
+.footer{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+   background-color: #e5e9d7;
+}
+/*nav시작*/
+.footer .fcon{
+  flex-basis: 1600px;
+  height:150px;
+  /* border: 1px solid; */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+ color:#222222;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="map1Fragment">
+  <div class="right-con">
+    <div class="right-top">
+      <div class="gnb">
+        <ul>
+            <th:block sec:authorize="isAnonymous()">
+                <li><a th:href="@{/member/login}">로그인</a></li>
+                <li><a th:href="@{/member/join}">회원가입</a></li>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="myInfo" th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                  <li>
+                <p th:text="${#authentication.principal.department}"></p>부
+                  </li>
+                  <li>
+                <p th:text="${#authentication.principal.mRank}"></p>
+                  </li>
+                  <li>
+                <p th:text="${#authentication.principal.name}"></p>님
+                  </li>
+                </div>
+                <li><a th:href="@{/logout}">로그아웃</a></li>
+            </th:block>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+        <div class="hh">
+            <h1><a th:href="@{/map}">본점</a></h1>
+            <h1><a th:href="@{/map1}">노원점</a></h1>
+            <h1><a th:href="@{/map2}">자동차관</a></h1>
+            <h1><a th:href="@{/map3}">야외관</a></h1>
+            <h1><a th:href="@{/map4}">커플관</a></h1>
+        </div>
+      <div class="index-data">
+          <h1>노원점 오시는길</h1>
+          <div id="map1" style="width:100%;height:350px;"></div>
+          <script>
+              var mapContainer = document.getElementById('map1'), // 지도를 표시할 div
+                  mapOption = {
+                      center: new kakao.maps.LatLng( 37.654837,127.061187), // 지도의 중심좌표
+                      level: 3 // 지도의 확대 레벨
+                  };
+
+              var map1 = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+              // 마커가 표시될 위치입니다
+              var markerPosition  = new kakao.maps.LatLng (37.654837,127.061187);
+
+              // 마커를 생성합니다
+              var marker = new kakao.maps.Marker({
+                  position: markerPosition
+              });
+
+              // 마커가 지도 위에 표시되도록 설정합니다
+              marker.setMap(map1);
+
+              // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+              // marker.setMap(null);
+          </script>
+          <div class="ct">
+
+              <table>
+                  <thead>
+
+                  </thead>
+                  <tbody>
+                  <tr>
+                      <th>주소</th>
+                      <td>
+                          <p class="txt1">- 서울특별시 노원구 동일로 1414 롯데백화점 노원점 10층</p>
+                          <p class="txt">- 1414, Dongil-ro, Nowon-gu, Seoul, Republic of Korea</p>
+                      </td>
+                  </tr>
+                  <tr>
+                      <th> 지하철</th>
+                      <td>
+                          <p class="txt1"><백화점 영업></p>
+                          <p class="txt1">- 4호선 노원역 하차 > 2번출구 > 노원역사거리방면 이동 > 본관 정문 또는 본관과 별관 사이 쉐이크쉑버거 방향 출입구 이용</p>
+                          <p class="txt1">- 7호선 노원역 하차 > 4번출구 옆 백화점 본관 B1F 식품관 연결출입구 이용</p>
+                          <p class="txt1"><백화점 휴점 / 폐점></백화점></p>
+                          <p class="txt1" style="color: red;">- 백화점 본관 정문 가장 좌측 '시네마전용출입구' 이용</p>
+                          <p class="txt1" style="color: red;">- 4호선 노원역 하차 > 2번출구 > 노원역사거리방면 백화점 본관 정문</p>
+                          <p class="txt" style="color: red;">- 7호선 노원역 하차 > 4번출구 > 노원역사거리방면 백화점 본관 정문</p>
+                      </td>
+                  </tr>
+                  <tr>
+                      <th>버스</th>
+                      <td class="td3">
+                          <p class="txt1"><백화점 영업></p>
+                          <p class="txt1">- 롯데백화점 앞 하차_노원05</p>
+                          <p class="txt1">-  롯데백화점 노원점 앞 하차_1132,1167</p>
+                          <p class="txt1">- 노원역 9번출구 하차_노원02,노원08,1129,1138,1142,1154,102,N13,N61,1-8,72-1</p>
+                          <p class="txt1">- 노원역 2번출구 하차_노원02,노원08</p>
+                          <p class="txt1"><백화점 휴점 / 폐점></백화점></p>
+                          <p class="txt" style="color: red;">- 백화점 본관 정문 가장 좌측 '시네마전용출입구' 이용</p>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

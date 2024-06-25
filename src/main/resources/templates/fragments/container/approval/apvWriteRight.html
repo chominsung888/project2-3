@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="apvWriteRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="apv-data">
+
+                <div class="write">
+                    <div class="write-con">
+                        <form th:action="@{/apv/write}" method="POST" enctype="multipart/form-data">
+                            <h1>보고서 작성</h1>
+                            <table>
+
+                                <tr>
+                                    <td class="td" rowspan="2">결재자</td> <!--결재자 부서 선택-->
+                                    <td class="abc"><span>부서</span><br><select class="dataSelect" th:name="apvDep" id="apvDep">
+                                        <option th:each="departmentDtoList : ${departmentDtoList}"
+                                                th:value="${departmentDtoList?.dptName}"
+                                                th:utext="${departmentDtoList?.dptName}">
+                                        </option>
+                                    </select></td>
+                                    <td class="abc"><select class="dataSelect" th:name="apvFnl" id="apvFnl">
+                                        <option th:each="member : ${memberDtoList}"
+                                                th:value="${member?.name}"
+                                                th:utext="${member?.department+' - ' + member?.mRank +' '+ member?.name}">
+                                        </option>
+                                    </select></td>
+                                    <td class="td" rowspan="2">문서종류</td>
+                                    <td class="td" rowspan="2">
+                                        <select class="dataSelect" th:name="approvalDivEntity"
+                                                id="approvalDivEntity">
+                                            <option th:each="apvDiv : ${approvalDivDtoList}"
+                                                    th:value="${apvDiv?.id}"
+                                                    th:utext="${apvDiv?.apvDivName}"></option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <input type="hidden" value="1" id="approvalStatusEntity"
+                                           name="approvalStatusEntity">
+                                    <input type="hidden" name="memberId" id="memberId" th:value="${memberId}">
+                                </tr>
+
+                                <tbody>
+                                <tr>
+                                    <td class="td">작성자</td>
+                                    <td class="td"><span>부서</span><br><input type="text" name="department" id="department"
+                                                              th:value="${department}" readonly></input></td>
+                                    <td class="td" colspan="1">
+                                        <input type="text" name="memberName" id="memberName"
+                                               th:value="${mRank +' '+memberName}" readonly></td>
+                                    <td class="td">결재 기한</td>
+                                    <td class="td"><input type="date" name="date" id="date" max="2099-12-31"
+                                                class="date"         min="2020-01-01" value="2024-05-31"></td>
+                                </tr>
+                                <tr>
+                                    <td class="td">제목</td>
+                                    <td class="td" colspan="4"><input type="text" name="apvTitle" id="apvTitle"
+                                                                           placeholder="제목을 입력하세요."></td>
+                                </tr>
+                                <tr>
+                                    <td class="content" colspan="5" rowspan="2">
+                                            <textarea name="apvContent" id="apvContent" cols="50" rows="30"
+                                            ></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td class="td">파일</td>
+                                    <td class="td" colspan="4">
+                                        <input type="file" name="apvFile" id="apvFile">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td" colspan="3"></td>
+                                    <td class="td"><input type="button" value="취소" onclick="history.back();"/></td>
+                                    <td class="td"><input type="submit" value="작성"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="chatbotRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+<!--                <ul>-->
+<!--&lt;!&ndash;                    <th:block sec:authorize="isAuthenticated()">&ndash;&gt;-->
+<!--                        <div class="myInfo"-->
+<!--                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">-->
+<!--                            <li>-->
+<!--                                <a th:text="${#authentication.principal.title}"></a>-->
+<!--&lt;!&ndash;                                <a th:text="${#authentication.principal.mRank}"></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a th:text="${#authentication.principal.name}"></a>&ndash;&gt;-->
+<!--                                <p>님</p>-->
+<!--                            </li>-->
+<!--                        </div>-->
+<!--                        <li>-->
+
+<!--                        </li>-->
+<!--&lt;!&ndash;                        <li><a th:href="@{/logout}">로그아웃</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </th:block>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a th:href="@{/my/schedule}">Fullcalendar</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <li>&ndash;&gt;-->
+<!--                </ul>-->
+            </div>
+        </div>
+
+        <div class="bottom">
+            <div class="apv-data">
+                <div class="chat">
+                    <div class="chat">
+                        <form th:action="@{/chatbot/chatIndex}" method="GET" enctype="multipart/form-data">
+                            <h1> 챗 봇 </h1>
+                            <div class="bot-con">
+
+                                <div id="chat-bot">
+                                    <div class="wrap">
+                                        <button type="button" id="btn-chat-open" onclick="openChat()">상담문의
+                                        </button>
+                                        <div id="chat-disp">
+                                            <h3 id="chat-header">
+                                                <span><img th:src="@{/images/chat-bot.png}" alt="chat" width="30px"
+                                                           height="30px">상담문의</span>
+                                                <span class="btn-wrap">
+                                            <button type="button" id="btn-chat-close" onclick="disconnect()">X</button>
+                                          </span>
+                                            </h3>
+                                            <div id="chat-content">
+                                            </div>
+                                            <div id="chat-question" class="flex between">
+                                                <span class="flex column center"><i></i></span>
+                                                <input type="text" id="question" placeholder="질문을 입력하세요">
+                                                <button type="button" id="btn-msg-send"
+                                                        onclick="btnMsgSendClicked()">전송
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+</html>
+
+
+
+
+
+
+
+
+

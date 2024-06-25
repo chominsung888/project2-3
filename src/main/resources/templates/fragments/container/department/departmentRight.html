@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="departmentRightFragment">
+  <div class="right-con">
+    <div class="right-top">
+      <div class="gnb">
+        <ul>
+          <th:block sec:authorize="isAnonymous()">
+            <li><a th:href="@{/member/login}">로그인</a></li>
+            <li><a th:href="@{/member/join}">회원가입</a></li>
+          </th:block>
+          <th:block sec:authorize="isAuthenticated()">
+            <div class="myInfo"
+                 th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+              <li>
+                <p th:text="${#authentication.principal.department}"></p>부
+              </li>
+              <li>
+                <p th:text="${#authentication.principal.mRank}"></p>
+              </li>
+              <li>
+                <p th:text="${#authentication.principal.name}"></p>님
+              </li>
+            </div>
+            <li><a th:href="@{/logout}">로그아웃</a></li>
+          </th:block>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="index-data">
+
+        </head>
+        <body>
+        <h1>본사조직도</h1>
+        <div class="button-container">
+          <button class="btn btn-success" onclick="showForm()">부서등록</button>
+        </div>
+        <div class="head-office">
+          <img src="/images/logo.png" alt="Head Office Logo">
+        </div>
+
+
+        <div id="departmentTree">
+          <!-- 부서 조직도 표시 -->
+        </div>
+
+        <!-- 부서 등록 폼 -->
+        <div id="departmentForm" style="display:none;">
+          <h2>부서등록</h2>
+          <form id="addDepartmentForm" action="/department/add" method="post">
+            <label for="deptName">부서이름:</label>
+            <input type="text" id="deptName" name="dptName"><br>
+            <label for="deptLocation">부서 위치:</label>
+            <input type="text" id="deptLocation" name="location"><br>
+            <button type="submit" class="btn btn-success">등록</button>
+            <button type="button" class="btn btn-secondary" onclick="hideForm()">닫기</button>
+          </form>
+        </div>
+        <!-- 멤버 리스트 표시 컨테이너 -->
+        <div id="memberListContainer"></div>
+
+        <script>
+          // 부서 등록 폼 표시 함수
+          function showForm() {
+            document.getElementById("departmentForm").style.display = 'block';
+          }
+          //부서 등록 폼 숨기기 함수
+          function hideForm(){
+            document.getElementById("departmentForm").style.display='none';
+          }
+
+          // 페이지 로드시 초기 부서 목록을 불러옵니다.
+          $(document).ready(function() {
+            loadDepartments();
+            loadParentDepartments();
+
+            // 폼 제출 시
+            $("#addDepartmentForm").submit(function(event) {
+              // 폼의 기본 동작을 중지
+              event.preventDefault();
+              // 서버로 폼 데이터를 전송
+              $.ajax({
+                type: "POST",
+                url: $(this).attr("action"),
+                data: $(this).serialize(), // 폼 데이터를 시리얼라이즈하여 전송
+                success: function(response) {
+                  // 성공적으로 등록된 경우, 부서 목록 다시 로드
+                  loadDepartments();
+                  // 등록 폼 숨김
+                  $("#departmentForm").hide();
+                  // 입력 필드 초기화
+                  $("#deptName").val("");
+                  $("#deptLocation").val("");
+                  // 상위 부서 목록 다시 로드
+                  loadParentDepartments();
+                },
+                error: function(xhr, status, error) {
+                  // 에러 발생 시 처리
+                  console.error(error);
+                  alert("부서 등록에 실패했습니다.");
+                }
+              });
+            });
+          });
+
+          // 부서 목록을 불러오는 함수
+          function loadDepartments() {
+            $.get("/department/list", function(data) {
+              console.log(data); // 데이터 확인
+              var departmentTree = $("#departmentTree");
+              departmentTree.empty();
+              // 부서 정보를 표시하는 함수 호출
+              displayDepartments(data, departmentTree);
+
+            });
+          }
+
+
+
+
+
+
+          // 부서 정보를 표시하는 함수
+        function displayDepartments(departments, parentElement) {
+          console.log(departments, " << departments");
+
+          const dept = departments.dept;
+          console.log(dept, " << 부서");
+
+          departments.deptList.forEach(function(department, idx) {
+            // 부서의 이름과 멤버수를 표시
+            var departmentElement = $("<div>").addClass("department");
+
+            dept.forEach(function(el, idx2) {
+              if (idx == idx2) {
+                console.log(el, " << 부서2");
+                departmentElement.html(department.dptName + " (" + el + "명)" +
+                  " <button onclick='showMemberList(\"" + department.dptName + "\")'>멤버보기</button>");
+                parentElement.append(departmentElement);
+              }
+            });
+
+            var memberListContainer = $("<div>").addClass("member-list").attr("id", "member-list-" + department.dptName);
+            departmentElement.append(memberListContainer);
+
+            if (department.childDepartments && department.childDepartments.length > 0) {
+              var childElement = $("<div>").addClass("sub-department");
+              departmentElement.append(childElement);
+              displayDepartments(department.childDepartments, childElement);
+            }
+          });
+        }
+
+          function showMemberList(departmentName) {
+            var memberListContainer = $("#member-list-" + departmentName);
+            memberListContainer.toggle();
+
+            if (memberListContainer.is(':visible')) {
+              $.ajax({
+                type: "GET",
+                url: "/department/members/" + encodeURIComponent(departmentName),
+                success: function(response) {
+                  memberListContainer.empty();
+                  if (response && response.length > 0) {
+                      //직급 과 숫자 간의 매핑
+                      var rankMap={
+                        "사장":1,
+                        "지점장":2,
+                        "팀장":3,
+                        "사원":4
+                      };
+                      //직급에 따라 정렬
+                      response.sort(function(a,b){
+                        return rankMap[a.mrank] - rankMap[b.mrank];
+                      });
+
+                      var memberList = $("<ul>");
+                      response.forEach(function(member){
+                        //직급과 이름을 출력
+                        memberList.append("<li>" + member.mrank + " " +member.name +"</li>");
+                      });
+
+
+
+
+
+                    var memberList = $("<ul>");
+                    response.forEach(function(member,idx) {
+                      console.log(member,' << member')
+                      console.log(member.id,' << id')
+                      console.log(member.mrank,' << member')
+                      console.log(idx,' << idx')
+
+                      var mrank = member.mrank ? member.mrank : "No Rank"; //mRank가 존재하지 안흥면 NORNAK로처리
+
+
+                      memberList.append("<li><a href='/member/memberInfo/" + member.id + "'>" + member.name + "(" + member.mrank + ")</a></li>");
+
+                    });
+                    memberListContainer.append(memberList);
+                  } else {
+                    memberListContainer.append("<p>멤버가 없습니다.</p>");
+                  }
+                },
+                error: function(xhr, status, error) {
+                  console.error(error);
+                  alert("멤버를 불러오는데 실패했습니다.");
+                }
+              });
+            }
+          }
+
+          //각 부서의 멤버수를 업데이트하는 함수
+          function updateDepartmentMemberCounts(){
+              $(".department").each(function(){
+                  var departmentName=$(this).text().split(" ")[0]; //부서 이름 추출
+                  $.ajax({
+                    type:"POST",
+                    url: "/department/updateMemberCount/" + encodeURIComponent(departmentName),
+                    success:function(response){
+                        console.log(response);
+                        loadDepartments(); //멤버수 업데이트 후 부서 목록 다시 로드
+                    },
+                      error:function(xhr,status,error){
+                          console.error(error);
+                          alert("부서 멤버수 업데이트에 실패 했습니다.");
+                    }
+          });
+          });
+          }
+
+        </script>
+        </body>
+
+      </div>
+    </div>
+  </div>
+</div>
+</html>
+
+
+
+

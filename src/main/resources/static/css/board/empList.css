@@ -1,0 +1,158 @@
+@import url(/css/common/reset.css);
+@import url(/css/common/left.css);
+
+.container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.boardList {
+ width: 100%;
+    box-sizing: border-box;
+    align-items:center;
+
+}
+
+.boardList .boardList-con{
+     width: 100%;
+     line-height: 2;
+     padding-top: 50px;
+     padding-left: 20px;
+     box-sizing: border-box;
+     padding-right: 50px;
+ }
+
+.boardList .boardList-con .writeButton{
+     margin: 10px;
+     margin-right: 0;
+     float: right;
+ }
+
+.boardList .boardList-con h1 img{
+     width: 30px;
+     height: 30px;
+ }
+
+.boardList .boardList-con button.delete{
+   background: #000000;
+   padding: 5px;
+   color: white;
+   border: 1px solid #ffffff;
+ }
+
+.boardList h1{
+   color: aliceblue;
+   text-align: center;
+   padding: 10px;
+   box-sizing: border-box;
+ }
+
+.boardList .search{
+   padding: 10px;
+   box-sizing: border-box;
+   display: flex;
+   justify-content: end;
+ }
+
+
+
+
+ /* 리스트css */
+
+ table{
+   width: 100%;
+   border-collapse: collapse;
+   font-family: Arial, sans-serif;
+ }
+
+ th,td{
+ /* border: 1px solid #cccccc; */
+     border-bottom: 1px solid #000000ad;
+ }
+
+ table th{
+   background-color: rgb(62 104 136 / 58%);
+   color: white;
+   padding: 5px;
+ }
+
+ table .list{
+   text-align: center;
+   padding: 5px;
+ }
+
+ table .list tr td{
+   text-align: center;
+   padding: 5px;
+ }
+
+ table .page{
+ text-align : center;
+ }
+
+ /*table td:not(:last-child){
+   text-align: center;
+   padding: 5px;
+ }
+
+ table th td:nth-last-child{
+ text-align : center;
+ }*/
+
+ table tr td  a {
+ /*display : flex;
+ justify-content : center;
+ align-items : center;
+ gap : 10px;*/
+
+   }
+ table tr td.btitle{
+     width: 500px !important;
+ }
+
+   table tr td.btitle> a {
+     display:block;
+     width: inherit;
+     overflow: hidden;
+     white-space:nowrap;
+     text-overflow: ellipsis;
+     /*background-color:#ffff00;*/
+   }
+   table tr td.btitle img{
+
+   }
+
+
+   table tr td  a:hover{
+ text-decoration: underline;
+ cursor: pointer;
+   }
+
+     table tr td  label:hover{
+   text-decoration: underline;
+   cursor: pointer;
+     }
+
+ table tr td  a img{
+     width : 20px;
+     height : 20px;
+ }
+
+ table td.ellipsis {
+   white-space: nowrap;
+ /* 텍스트가 한 줄로 유지되도록 함 */
+       overflow: hidden;
+ /* 요소의 내용이 넘칠 때 숨김 */
+       text-overflow: ellipsis; */
+ /* 넘치는 텍스트에 말줄임표(...) 추가 */
+       max-width: 200px;
+ /* 요소의 최대 너비 지정 */
+ }
+
+ .paging ul{
+     display: flex;
+     justify-content: center;
+     gap: 20px;
+ }

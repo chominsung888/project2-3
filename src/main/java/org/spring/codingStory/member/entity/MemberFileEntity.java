@@ -2,6 +2,7 @@ package org.spring.codingStory.member.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.spring.codingStory.member.dto.MemberFileDto;
 
 import javax.persistence.*;
 
@@ -30,5 +31,13 @@ public class MemberFileEntity {
     private MemberEntity memberEntity;
 
 
+  public static MemberFileEntity toInsertFile(MemberFileDto fileDto) {
+      MemberFileEntity fileEntity=new MemberFileEntity();
 
+      fileEntity.setMemberEntity(fileDto.getMemberEntity());
+      fileEntity.setMemberNewFileName(fileDto.getMemberNewFileName());
+      fileEntity.setMemberOldFileName(fileDto.getMemberOldFileName());
+
+      return fileEntity;
+  }
 }

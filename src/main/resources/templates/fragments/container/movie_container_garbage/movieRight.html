@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="MovieRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <a th:href="@{/api/movie/index1}">일일 박스 오피스</a>
+            <a th:href="@{/api/movie/index}">전체 영화 검색</a>
+            <a th:href="@{/api/movie/index2}">주말 박스오피스</a>
+            <a th:href="@{/api/movie/index3}">주중 박스오피스</a>
+            <!--일일 박스오피스-->
+            <h1 id="title"></h1>
+            <div id="movie-container"></div>
+
+            <!-- 모달 창 -->
+            <!--<div id="movieModal" class="modal" style="display:none;">-->
+            <div id="movieModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="movie-info"></div>
+                </div>
+            </div>
+
+
+        </div>
+        </div>
+    </div>
+</div>
+</html>

@@ -21,7 +21,7 @@ public class RankEntity {
     @Column(name = "mRank_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String rankName;
 
     @JsonIgnore // ajax시 순환참조 방지

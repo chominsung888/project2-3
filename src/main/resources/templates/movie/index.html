@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenMovie Api</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/movie/indexAll.css}">
+    <script th:src="@{/js/movie/movie.js}" defer></script>
+
+    <link rel="stylesheet" th:href="@{/css/chat/chat-bot.css}">
+    <script th:src="@{/js/mv_chat/mv_chat.js}" defer></script>
+</head>
+<body>
+<div class="bot-con">
+    <div id="chat-bot">
+
+        <div class="wrap">
+            <button type="button" id="btn-chat-open" onclick="openChat()"><img th:src="@{/images/icon/moviecon.png}" alt="Movie Bot"></button>
+            <div id="chat-disp" style="display: none;">
+                <h3 id="chat-header">
+                    <span>MOVIE BOT</span>
+                    <span class="btn-wrap">
+							<button type="button" id="btn-chat-close" onclick="disconnect()">X</button>
+						</span>
+                </h3>
+
+                <div id="chat-content"></div>
+
+                <div id="chat-question" class="flex between">
+                    <span class="flex column center"><i></i></span>
+                    <input type="text" id="question" placeholder="질문을 입력하세요">
+                    <button type="button" id="btn-msg-send" onclick="btnMsgSendClicked()">전송</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--영화 전체 검색-->
+    <a th:href="@{/index}"><img th:src="@{/images/logo.png}" alt="Maple Logo" id="logo"> </a>
+<h1 id="title">영화 검색</h1>
+<div class="button-container">
+    <a class="button" th:href="@{/movie/index}">전체 영화 검색</a>
+    <a class="button" th:href="@{/movie/index1}">일일 박스 오피스</a>
+    <a class="button" th:href="@{/movie/index2}">주말 박스오피스</a>
+    <a class="button" th:href="@{/movie/index3}">주중 박스오피스</a>
+</div>
+<div class="container">
+        <div class="search">
+        <input type="text" id="search-input" placeholder="영화명을 검색하세요.">
+        <button id="search-button">검색</button>
+    </div>
+    <div id="movie-container" class="movies"></div>
+</div>
+
+
+</body>
+</html>

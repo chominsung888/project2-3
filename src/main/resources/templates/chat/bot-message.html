@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<title>Movie Bot</title>
+<!--	<link rel="stylesheet" th:href="@{/css/style.css}">-->
+</head>
+<body>
+<div class="flex center date" th:if="${msg.today}" th:text="${msg.today}"></div>
+<div class="msg bot flex">
+	<div class="icon">
+		<img th:src="@{/images/chat-bot.png}" alt="Movie Bot" style="width: 40px">
+	</div>
+
+
+	<div class="message">
+		<div class="part" th:if="${msg.answer.movieDetail != null}">
+			<p th:utext="'영화 제목: ' + ${msg.answer.movieDetail.movieNm}"></p>
+			<p th:utext="'영화 코드: ' + ${msg.answer.movieDetail.movieCd}"></p>
+			<p th:utext="'개봉일: ' + ${msg.answer.movieDetail.openDt}"></p>
+			<p th:utext="'상영 시간: ' + ${msg.answer.movieDetail.showTm}+'분'"></p>
+			<p th:utext="'제작 상태: ' + ${msg.answer.movieDetail.prdtStatNm}"></p>
+
+			<!-- 추가 필드들을 여기에 추가 -->
+			<div th:if="${msg.answer.movieDetail.genres != null}">
+				<ul>
+					<li th:each="genre : ${msg.answer.movieDetail.genres}">
+						<span th:utext="'장르: ' +${genre.genreNm}"></span>
+					</li>
+				</ul>
+			</div>
+
+			<div th:if="${msg.answer.movieDetail.directors != null}">
+				<ul>
+					<li th:each="director : ${msg.answer.movieDetail.directors}">
+						<span th:utext="'감독: ' +${director.peopleNm}"></span>
+					</li>
+				</ul>
+			</div>
+
+			<div th:if="${msg.answer.movieDetail.actors != null}">
+				<ul>
+					<li th:each="actor : ${msg.answer.movieDetail.actors}">
+						<span th:utext="'배우: ' +${actor.peopleNm}"></span>
+					</li>
+				</ul>
+			</div>
+			<!-- 추가 필드들을 필요에 따라 여기에 추가 -->
+			<div th:if="${msg.answer.movieDetail.companys != null}">
+				<ul>
+					<li th:each="company : ${msg.answer.movieDetail.companys}">
+						<span th:utext="'제작사: ' +${company.companyNm}"></span>
+					</li>
+				</ul>
+			</div>
+
+
+
+		</div>
+
+		<div class="part" th:if="${msg.answer.keyword eq '오늘'}">
+			<div th:replace="chat/fragments/today :: today"></div>
+		</div>
+
+		<div class="part" th:if="${msg.answer.keyword eq '주중'}">
+			<div th:replace="chat/fragments/week :: week"></div>
+		</div>
+
+		<div class="part" th:if="${msg.answer.keyword eq '주말'}">
+			<div th:replace="chat/fragments/weekly :: weekly"></div>
+		</div>
+
+		<div class="part" th:if="${msg.answer.keyword ne '오늘' and msg.answer.keyword ne '제목' and msg.answer.movieDetail == null}">
+			<p th:utext="${msg.answer.text}"></p>
+		</div>
+
+		<div class="time" th:text="${msg.time}">메세지 작성 시간</div>
+	</div>
+</div>
+</body>
+</html>

@@ -22,7 +22,7 @@ public class ApprovalDivEntity {
 
     @Column(nullable = false)
     private String apvDivName;
-
+    //보고서의 종류
 
     @JsonIgnore // ajax시 순환참조 방지
     @OneToMany(mappedBy = "approvalDivEntity"

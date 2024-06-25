@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="apvDetailRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="apv-data">
+
+                <div class="write">
+                    <div class="write-con">
+                        <form th:action="@{/apv/apvOk}" method="POST" enctype="multipart/form-data">
+                            <h1>보고서 상세보기</h1>
+                            <table>
+                                <thead>
+                                <input type="hidden" name="id" id="id" th:value="${approvalDto.id}">
+                                <input type="hidden" name="memberId" id="memberId"
+                                       th:value="${approvalDto.memberEntity.id}">
+                                <tr><!--결재자 정보-->
+                                    <td class="td" rowspan="2">결재자</td>
+                                    <td class="td" rowspan="2"><label>부서</label> <br> <input type="text" id="dept" name="dept"
+                                    th:value="${apvFnlDept}" readonly> </td><!--결재자 부서-->
+                                    <td class="td"><span type="text" id="apvFnl1" name="apvFnl"  th:text="${apvFnlRank}" readonly></span>
+                                        <input type="text" id="apvFnl" name="apvFnl"
+                                                              th:value="${approvalDto.apvFnl}" readonly></input></td>
+                                    <td class="td" rowspan="2">문서종류</td>
+                                    <td class="td" rowspan="2">
+                                            <input type="text" name="approvalDivEntity1"
+                                                  th:value="${approvalDto.approvalDivEntity.apvDivName}" readonly
+                                            ></input>
+                                        <input type="hidden" id="approvalDivEntity" name="approvalDivEntity"
+                                               th:value="${approvalDto.approvalDivEntity.id}"></td>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td class="td">작성자</td><!--작성자 정보-->
+                                    <td class="td"><label>부서</label> <br><input type="text" name="department" id="department"
+                                                              th:value="${department}" readonly></input></td>
+                                    <td class="td"><input type="text" name="memberName" id="memberName"
+                                                              th:value="${mRank +' - '+memberName}" readonly
+                                    ></input></td>
+                                    <td class="td">결재 기한</td>
+                                    <td class="td"><input type="text" name="date" id="date"
+                                                              th:value="${approvalDto.date}" readonly
+                                    ></input></td>
+                                </tr>
+                                <tr>
+                                    <td class="td">제목</td>
+                                    <td class="td" colspan="4"><input type="text" name="apvTitle" id="apvTitle"
+                                                                          th:value="${approvalDto.apvTitle}" readonly
+                                    ></td>
+                                </tr>
+                                <tr>
+                                    <td class="content" colspan="5">
+                                            <textarea name="apvContent" id="apvContent"
+                                                      cols="50" rows="30"
+                                                      readonly>[[${approvalDto.apvContent}]]</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td">파일</td>
+                                    <td class="td" colspan="2"><span type="text" name="apvFile" id="apvFile"
+                                                                           th:text="${approvalDto.apvOldFileName}"
+                                                                     readonly></span></td>
+                                    <td class="td" colspan="2">파일 다운로드</td>
+                                </tr>
+
+                                <!--↓자기가 결재자 일 때-->
+                                <th:block th:if="${approvalDto.apvFnl==myUserDetails.name}">
+                                    <tr>
+                                        <td class="def" colspan="5"><!--코멘트 작성-->
+                                            <textarea name="apvCom" id="apvCom" cols="20" rows="20"
+                                                      placeholder="상신 답글">[[${approvalDto.apvCom}]]</textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="def">상태</td>
+                                        <td class="def"><select class="dataSelect"
+                                                                    th:name="approvalStatusEntity"
+                                                                    id="approvalStatusEntity">
+                                            <option th:each="apvStatus : ${approvalStatusDtoList}"
+                                                    th:value="${apvStatus?.id}"
+                                                    th:utext="${apvStatus?.apvStatus}"
+                                                    th:selected="${apvStatus.apvStatus eq approvalDto.approvalStatusEntity.apvStatus}"></option>
+                                        </select></td>
+                                        <td class="def"></td>
+                                        <td class="def"></td>
+                                        <td class="def"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="abc">작성일</td>
+                                        <td class="abc"><span type="text" name="createTime" id="createTime1"
+                                                                  th:text="${#temporals.format(approvalDto.createTime, 'yyyy-MM-dd HH:mm')}"></span></td>
+                                        <td class="abc"></td>
+                                        <td class="abc"><input type="button" value="취소"
+                                                                   onclick="history.back();"/></td>
+                                        <td class="abc"><input type="submit" value="상신"
+                                                                   onclick="return confirm('정말 상신 하시겠습니까?')"></td>
+                                    </tr>
+                                </th:block>
+                                <!--↓자기가 결재자가 아닐 때-->
+                                <th:block th:unless="${approvalDto.apvFnl==myUserDetails.name}">
+                                    <tr>
+                                        <td class="td" colspan="5">
+                                                <textarea name="apvCom" cols="40" rows="10"
+                                                          placeholder="상신 답글"
+                                                          readonly>[[${approvalDto.apvCom}]]</textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td">상태</td>
+                                        <td class="td"><span type="text" name="apvStatus" id="apvStatus"
+                                                                  th:text="${approvalDto.approvalStatusEntity.apvStatus}"></span>
+                                        </td>
+                                        <td class="td"></td>
+                                        <td class="td"></td>
+                                        <td class="td"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="abc">작성일</td>
+                                        <td class="abc"><span type="text" name="createTime" id="createTime2"
+                                                                  th:text="${#temporals.format(approvalDto.createTime, 'yyyy-MM-dd HH:mm')}"></span></td>
+                                        <td class="abc"><input type="button" value="취소"
+                                                                   onclick="history.back();"/></td>
+                                        <td class="abc"><a
+                                            th:href="@{/apv/apvUpdate/{id}(id=${approvalDto.id})}">수정</a></td>
+                                        <td class="abc"><a
+                                            th:href="@{/apv/apvDelete/{id}(id=${approvalDto.id})}"
+                                            onclick="return confirm('정말 삭제 하시겠습니까?')">삭제</a></td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+
+
+
+
+
+
+
+
+

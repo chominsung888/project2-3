@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="myApvDenyListRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom">
+            <div class="index-data">
+                <div class="head">
+                    <h1>
+                        <a th:href="@{/apv/myApvList}">보낸문서 <span th:text="${apvMyCount}"></span> </a>
+                    </h1>
+                    <h1>
+                        <a th:href="@{/apv/myApvDenyList}">반려된 문서 <span th:text="${apvMyDenyCount}"></span> </a>
+                    </h1>
+                    <h1>
+                        <a th:href="@{/apv/waitList}">결재 대기 문서 <span th:text="${apvWaitCount}"></span> </a>
+                    </h1>
+                    <h1>
+                        <a th:href="@{/apv/denyList}">반려한 문서 <span th:text="${apvDenyCount}"></span> </a>
+                    </h1>
+                    <h1>
+                        <a th:href="@{/apv/list}">받은 전체 문서 <span th:text="${apvCount}"></span> </a>
+                    </h1>
+                    <h1>
+                        <a th:href="@{/apv/write}">문서작성 </a>
+                    </h1>
+                </div>
+                <h1>반려된 문서 <span th:text="${apvMyDenyCount}"></span></h1>
+                <div class="tableList">
+                    <table>
+                        <thead>
+                        <!--  검색 -->
+                        <tr>
+                            <div class="search">
+
+                                <form th:action="@{/apv/denyList}" method="get">
+                                    <select name="subject" id="subject">
+                                        <option value="" th:selected="${#strings.isEmpty(param.subject)}">::선택::
+                                        </option>
+                                        <option value="apvTitle"
+                                                th:selected="${#strings.equals(param.subject,'apvTitle')}">제목
+                                        </option>
+                                        <option value="apvContent"
+                                                th:selected="${#strings.equals(param.subject,'apvContent')}">내용
+                                        </option>
+                                    </select>
+
+                                    <input type="text" name="search" id="search" th:value="${param.search}">
+                                    <input type="submit" value="검색">
+                                </form>
+                            </div>
+
+                        </tr>
+
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>결재 양식</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>상태</th>
+                            <th>기한</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="apvDto : ${approvalDtoPage}"
+                            th:onclick="|location.href='@{/apv/detail/{id}(id=${apvDto.id})}'|">
+                            <td th:text="${apvDto.id}"></td>
+                            <td class="atitle">
+                                <a th:href="@{/apv/detail/{id}(id=${apvDto.id})}"><label
+                                    th:text="${apvDto.apvTitle}"> </label></a>
+                            </td>
+                            <td th:text="${apvDto.approvalDivEntity.apvDivName}"></td>
+                            <td th:text="${apvDto.memberEntity.name}"></td>
+                            <td th:text="${#temporals.format(apvDto.createTime, 'yyyy-MM-dd HH:mm')}"></td>
+                            <td th:text="${apvDto.approvalStatusEntity.apvStatus}"></td>
+                            <td th:text="${apvDto.date}"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot class="page">
+                        <tr>
+                            <td colspan="7" class="tdPaging">
+                                <div class="paging">
+                                    <ul>
+                                        <li>
+                                    <span th:if="${approvalDtoPage.pageable.pageNumber+1 eq 1}"
+                                          class="span0"> &laquo</span>
+                                            <span th:unless="${approvalDtoPage.pageable.pageNumber+1 eq 1}">
+                                          <a th:href="@{/apv/denyList(page=0,search=${param.search},subject=${param.subject})}"
+                                             class="span1"> &laquo</a>
+                                             </span>
+                                        </li>
+                                        <li>
+                                        <span th:if="${1==approvalDtoPage.pageable.pageNumber+1}"
+                                              class="span0">&lt</span>
+                                            <span th:unless="${1==approvalDtoPage.pageable.pageNumber+1}">
+                                                 <a th:href="@{/apv/denyList(page=${approvalDtoPage.pageable.pageNumber-1}
+                                                 ,search=${param.search},subject=${param.subject})}"
+                                                    class="span1">&lt</a>
+                                    </span>
+                                        </li>
+                                        <li th:each="i: ${#numbers.sequence(startPage,endPage)}" class="block">
+                                    <span th:if="${i==approvalDtoPage.pageable.pageNumber+1}" th:text="${i}"
+                                          class="now"></span>
+                                            <a th:unless="${i==approvalDtoPage.pageable.pageNumber+1}"
+                                               th:href="@{/apv/denyList(page=${i-1},search=${param.search},subject=${param.subject})}"
+                                               th:text="${i}"></a>
+                                        </li>
+                                        <li>
+                                    <span th:if="${approvalDtoPage.totalPages==approvalDtoPage.pageable.pageNumber+1}"
+                                          class="span0">&gt</span>
+                                            <span
+                                                th:unless="${approvalDtoPage.totalPages==approvalDtoPage.pageable.pageNumber+1}">
+                                          <a th:href="@{/apv/denyList(page=${approvalDtoPage.pageable.pageNumber+1}
+                                          ,search=${param.search},subject=${param.subject})}"
+                                             class="span1">&gt</a>
+                                      </span>
+                                        </li>
+                                        <li>
+                                    <span th:if="${approvalDtoPage.totalPages==approvalDtoPage.pageable.pageNumber+1}"
+                                          class="span0">&raquo</span>
+                                            <span
+                                                th:unless="${approvalDtoPage.totalPages==approvalDtoPage.pageable.pageNumber+1}">
+                                          <a th:href="@{/apv/denyList(page=${approvalDtoPage.totalPages-1}
+                                          ,search=${param.search},subject=${param.subject})}"
+                                             class="span1">&raquo</a>
+                                      </span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</html>

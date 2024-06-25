@@ -1,0 +1,298 @@
+[33mcommit 5e8de22d073fbe2aaf8dbe0bb81f93fae11a4d78[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mboard[m[33m)[m
+Author: thisisticket <leedlrjsvy1@gmail.com>
+Date:   Tue May 28 14:22:28 2024 +0900
+
+    board1
+
+[33mcommit b6257a0974519faa899e30b87c3d70ec2fcf9666[m[33m ([m[1;31morigin/board[m[33m)[m
+Merge: f70716e a570a6f
+Author: thisisticket <leedlrjsvy1@gmail.com>
+Date:   Mon May 27 10:19:34 2024 +0900
+
+    board0527
+
+[33mcommit f70716ed1e67223984d7c1f8dbc32fb3d5c7f53f[m
+Author: thisisticket <leedlrjsvy1@gmail.com>
+Date:   Mon May 27 10:01:06 2024 +0900
+
+    board1
+
+[33mcommit a570a6fb76e9a1b3564e9f702bbba3c4babe0644[m
+Merge: f1c3d0d fa69e1f
+Author: wjflenldrnf <154856783+wjflenldrnf@users.noreply.github.com>
+Date:   Mon May 27 10:00:38 2024 +0900
+
+    Merge pull request #31 from leegeonpyo/attendance
+    
+    Attendance
+
+[33mcommit fa69e1f52a895782de5ca9de4f55b5c3ad02ff3c[m
+Author: wjflenldrnf <wjflenldrnf@gmail.com>
+Date:   Mon May 27 09:59:18 2024 +0900
+
+    attt
+
+[33mcommit cc58c3c301826ac08fa3fc94b26357e583ea48bd[m
+Merge: ce2d145 f1c3d0d
+Author: wjflenldrnf <wjflenldrnf@gmail.com>
+Date:   Mon May 27 09:37:50 2024 +0900
+
+    At
+
+[33mcommit ce2d1455a7bbe7a8326305e4bfe4a42eedf2ebe1[m
+Author: wjflenldrnf <wjflenldrnf@gmail.com>
+Date:   Mon May 27 09:36:12 2024 +0900
+
+    at
+
+[33mcommit f1c3d0dccd5e023fe7587ea7e34325c60c4695b4[m
+Merge: 9629cc8 7c12eea
+Author: chominsung888 <154856467+chominsung888@users.noreply.github.com>
+Date:   Fri May 24 12:36:45 2024 +0900
+
+    Merge pull request #30 from leegeonpyo/department
+    
+    Department
+
+[33mcommit 7c12eea274dc95ecfaf6056979f3b8f8eec6c7a2[m[33m ([m[1;31morigin/department[m[33m)[m
+Merge: 26902a2 9629cc8
+Author: chominsung888 <chominsung888>
+Date:   Fri May 24 12:36:19 2024 +0900
+
+    depart1234
+
+[33mcommit 26902a21baaf9200547d226a31a5dde495211de4[m
+Author: chominsung888 <chominsung888>
+Date:   Fri May 24 12:29:29 2024 +0900
+
+    dep
+
+[33mcommit 9629cc8e86752b5907632ae2b7ce64e1d82876a3[m
+Merge: 0906007 bdf4cd6
+Author: wjflenldrnf <154856783+wjflenldrnf@users.noreply.github.com>
+Date:   Fri May 24 12:29:01 2024 +0900
+
+    Merge pull request #29 from leegeonpyo/attendance
+    
+    Attendance
+
+[33mcommit bdf4cd60b4935490d2910cf93658dfe659824764[m
+Merge: 8f2e253 0906007
+Author: wjflenldrnf <wjflenldrnf@gmail.com>
+Date:   Fri May 24 12:17:06 2024 +0900
+
+    at
+
+[33mcommit 0906007d10d72461492f962e6c9d0a0326a35e80[m
+Merge: 6424736 43c8ff6
+Author: leegeonpyo <154856555+leegeonpyo@users.noreply.github.com>
+Date:   Fri May 24 12:03:40 2024 +0900
+
+    Merge pull request #28 from leegeonpyo/board
+    
+    Board
+
+[33mcommit 43c8ff68af54a3c371c883fc6b803c63dd1d3455[m
+Author: thisisticket <leedlrjsvy1@gmail.com>
+Date:   Fri May 24 12:02:49 2024 +0900
+
+    board05241
+
+[33mcommit 085557fe9fcb9710e94ff341cf74cb9853140fa3[m
+Merge: d7bbf48 6424736
+Author: thisisticket <leedlrjsvy1@gmail.com>
+Date:   Fri May 24 11:55:41 2024 +0900
+
+    Merge branch 'dev' into board
+
+[33mcommit d7bbf486759cf759f4e7927b5a16551b6a013e78[m
+Merge: 9eb9b1a b184166
+Author: thisisticket <leedlrjsvy1@gmail.com>
+Date:   Fri May 24 11:55:19 2024 +0900
+
+    board1234
+
+[33mcommit 6424736604ec2332fd539c4f78dfa3e9df416343[m
+Merge: b184166 acc2851
+Author: SIM <154939602+Sim-Ji-Seob@users.noreply.github.com>
+Date:   Fri May 24 11:54:56 2024 +0900
+
+    Merge pull request #27 from leegeonpyo/approval
+    
+    apv
+
+[33mcommit acc2851b08dbaef5e83b86d3cdcdbe6f27ec3c6f[m
+Author: Sim-Ji-Seob <maigc347992@gmail.com>
+Date:   Fri May 24 11:54:07 2024 +0900
+
+    apv
+
+[33mcommit 8f2e2530875cd6933e0b7e40b1ebd2ce99fc042e[m
+Author: wjflenldrnf <wjflenldrnf@gmail.com>
+Date:   Fri May 24 11:54:00 2024 +0900
+
+    at
+
+[33mcommit 9eb9b1a9e68cee18362a7e3b098e3fd2fdc31b82[m
+Author: thisisticket <leedlrjsvy1@gmail.com>
+Date:   Fri May 24 11:51:09 2024 +0900
+
+    board0524
+
+[33mcommit b184166ab0b5d64fe26a601d66f391c4cc3053e8[m
+Merge: c89b5b7 2881025
+Author: SIM <154939602+Sim-Ji-Seob@users.noreply.github.com>
+Date:   Fri May 24 11:51:03 2024 +0900
+
+    Merge pull request #26 from leegeonpyo/approval
+    
+    Approval
+
+[33mcommit 288102578d7e59dbd1466ddd12e3352b8c7c1524[m
+Merge: 1fdb61c c89b5b7
+Author: Sim-Ji-Seob <maigc347992@gmail.com>
+Date:   Fri May 24 11:36:52 2024 +0900
+
+    Merge branch 'dev' into approval
+
+[33mcommit 1fdb61cd65778cbe19d7c11933c9f408a48248fc[m
+Author: Sim-Ji-Seob <maigc347992@gmail.com>
+Date:   Fri May 24 11:36:25 2024 +0900
+
+    apv
+
+[33mcommit c89b5b73fc6c372a050b940a7e1d6ff69b7588ab[m
+Merge: 4f6f6f3 d453e99
+Author: ParkKyeongChan <154895700+ParkKyeongChan@users.noreply.github.com>
+Date:   Fri May 24 11:35:45 2024 +0900
+
+    Merge pull request #25 from leegeonpyo/member
+    
+    Member
+
+[33mcommit d453e99cf31227900c63d116b13ff723a4ba8008[m[33m ([m[1;31morigin/member[m[33m)[m
+Author: ParkKyoengChan <pkc7219@gmail.com>
+Date:   Fri May 24 11:33:35 2024 +0900
+
+    123
+
+[33mcommit a3220e4a5796e1ee32abdae0f8c5e9b822f39ed9[m
+Merge: 4a18437 4f6f6f3
+Author: ParkKyoengChan <pkc7219@gmail.com>
+Date:   Thu May 23 11:25:03 2024 +0900
+
+    Merge branch 'dev' into member
+
+[33mcommit 4a1843708f46f145c98a9a436394274da881f21e[m
+Author: ParkKyoengChan <pkc7219@gmail.com>
+Date:   Thu May 23 11:24:36 2024 +0900
+
+    1
+
+[33mcommit 4f6f6f3576a384154e08949c920e3f7aae5ee9a5[m
+Merge: eb9590b 39dabf7
+Author: chominsung888 <154856467+chominsung888@users.noreply.github.com>
+Date:   Thu May 23 11:24:13 2024 +0900
+
+    Merge pull request #24 from leegeonpyo/department
+    
+    Department
+
+[33mcommit 39dabf7668061d7625db240bd3cbfdca1f2f3cac[m
+Merge: f3deb98 eb9590b
+Author: chominsung888 <chominsung888>
+Date:   Thu May 23 11:22:17 2024 +0900
+
+    Merge branch 'dev' into department
+
+[33mcommit f3deb98f412bea3e00173a38fa7ed2ad6f6f8903[m
+Author: chominsung888 <chominsung888>
+Date:   Thu May 23 11:21:39 2024 +0900
+
+    dep
+
+[33mcommit bb9556753b74087157c197f31f0bed4c005e7780[m
+Merge: b782fee eb9590b
+Author: wjflenldrnf <wjflenldrnf@gmail.com>
+Date:   Wed May 22 14:35:05 2024 +0900
+
+    Merge branch 'dev' into attendance
+
+[33mcommit eb9590bf53c985cb68dcf09f173c4c18cd64aedd[m
+Merge: 6321ff5 581f45a
+Author: ParkKyeongChan <154895700+ParkKyeongChan@users.noreply.github.com>
+Date:   Wed May 22 14:34:14 2024 +0900
+
+    Merge pull request #23 from leegeonpyo/member
+    
+    Member
+
+[33mcommit 581f45a7c8acf0439424ed39040d5c4914ae8f07[m
+Merge: 0aa655b 6321ff5
+Author: ParkKyoengChan <pkc7219@gmail.com>
+Date:   Wed May 22 14:33:11 2024 +0900
+
+    member0522
+
+[33mcommit b782feee436e96639126dbb0fba0966e79c6c148[m
+Merge: 75b0a8d 6321ff5
+Author: wjflenldrnf <wjflenldrnf@gmail.com>
+Date:   Wed May 22 14:30:08 2024 +0900
+
+    Merge branch 'dev' into attendance
+
+[33mcommit 75b0a8d0c4ba793307cf2a406f3e40159308aa51[m
+Author: wjflenldrnf <wjflenldrnf@gmail.com>
+Date:   Wed May 22 14:29:47 2024 +0900
+
+    atatat
+
+[33mcommit 0aa655b507a826633f69c3ea0569e76ecc3276a8[m
+Author: ParkKyoengChan <pkc7219@gmail.com>
+Date:   Wed May 22 12:29:48 2024 +0900
+
+    324
+
+[33mcommit 6321ff53293872a56adf9a505e16515d2cec7494[m
+Merge: 8ee2284 db3ec5a
+Author: chominsung888 <154856467+chominsung888@users.noreply.github.com>
+Date:   Wed May 22 12:29:23 2024 +0900
+
+    Merge pull request #22 from leegeonpyo/department
+    
+    Department
+
+[33mcommit db3ec5a3b96af1a58e81b2c312f63a401e78410c[m
+Author: chominsung888 <chominsung888>
+Date:   Wed May 22 12:28:47 2024 +0900
+
+    depart0522
+
+[33mcommit 914465d3c3c90cf71668a367d59d1f46386ac835[m
+Merge: 520c342 8ee2284
+Author: chominsung888 <chominsung888>
+Date:   Tue May 21 17:53:53 2024 +0900
+
+    depart
+
+[33mcommit 8ee228420c85879690155ae11d19efd71e5d1816[m
+Merge: 081e4ef 879979a
+Author: wjflenldrnf <154856783+wjflenldrnf@users.noreply.github.com>
+Date:   Tue May 21 17:46:13 2024 +0900
+
+    Merge pull request #21 from leegeonpyo/attendance
+    
+    Attendance
+
+[33mcommit 520c3428c2be146e701f55b0fe4d4fadffb4587b[m
+Merge: a674849 366abbf
+Author: chominsung888 <chominsung888>
+Date:   Tue May 21 17:45:15 2024 +0900
+
+    dpt
+
+[33mcommit 879979a4c7f4393ad7f539b58c0f105317e7ba51[m
+Merge: a1b8dfb 081e4ef
+Author: wjflenldrnf <wjflenldrnf@gmail.com>
+Date:   Tue May 21 17:36:35 2024 +0900
+

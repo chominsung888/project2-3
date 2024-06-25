@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="apvWriteRightFragment">
+    <div class="right-con">
+        <div class="top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAnonymous()">
+                        <li><a th:href="@{/member/login}">로그인</a></li>
+                        <li><a th:href="@{/member/Join}">회원가입</a></li>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        로그인중
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="apv-data">
+                <div class="container">
+                    <div class="write">
+                        <div class="write-con">
+                            <form th:action="@{/apv/write}" method="POST" enctype="multipart/form-data">
+                                <h1>보고서 작성</h1>
+                                <ul>
+
+                                    <li>
+                                        <label for="apvFnl">결재자</label>
+
+<!--                                        <select class="dept" th:name="department" id="department">-->
+<!--                                            <option value="선택"> 선택</option> &lt;!&ndash;부서 작업을 받아야 한다&ndash;&gt;-->
+<!--                                            <option th:each="member : ${memberDtoList}"-->
+<!--                                                    th:value="${member?.name}"-->
+<!--                                                    th:utext="${member?.name}"></option>-->
+<!--                                        </select>-->
+
+                                    <select class="select_type01 w170" th:name="apvFnl" id="apvFnl">
+                                        <option value="선택"> 선택</option><!--해당 부서 사람만 선택-->
+                                        <option th:each="member : ${memberDtoList}"
+                                                th:value="${member?.name}"
+                                                th:utext="${member?.name}">
+                                        </option>
+                                    </select>
+                                    </li>
+
+                                    <li>
+                                        <label for="approvalDivEntity">문서 종류</label>
+                                        <select class="select_type01 w170" th:name="approvalDivEntity" id="approvalDivEntity">
+                                            <option value="선택"> 선택</option>
+                                            <option th:each="apvDiv : ${approvalDivDtoList}"
+                                                    th:value="${apvDiv?.id}"
+                                                    th:utext="${apvDiv?.apvDivName}"></option>
+                                        </select>
+                                    </li>
+
+                                    <li>
+<!--                                        <label for="approvalStatusEntity">진행 상태</label>-->
+<!--                                        <select class="select_type01 w170" th:name="approvalStatusEntity" id="approvalStatusEntity">-->
+<!--                                            <option value="선택"> 선택</option>-->
+<!--                                            <option th:each="apvStatus : ${approvalStatusDtoList}"-->
+<!--                                                    th:value="${apvStatus?.id}"-->
+<!--                                                    th:utext="${apvStatus?.apvStatus}"></option>-->
+<!--                                        </select>-->
+                                        <input type="hidden" value="1" id="approvalStatusEntity" name="approvalStatusEntity">
+
+                                    <li>
+                                        <label for="memberName">보고서 작성자</label><!--결재자 선택하는 것 처럼 본인 선택하도록?-->
+                                        <input type="text" name="memberName" id="memberName" th:value="${memberName}" readonly>
+                                    </li>
+
+                                    <li>
+                                        <input type="hidden" name="memberId" id="memberId" th:value="${memberId}">
+                                    </li>
+
+                                    <li>
+                                        <label for="apvTitle">기안서 제목</label>
+                                        <input type="text" name="apvTitle" id="apvTitle" placeholder="제목을 입력하세요.">
+                                    </li>
+
+                                    <li>
+                                        <label for="apvContent">기안서 내용</label>
+                                        <textarea name="apvContent" id="apvContent" cols="50" rows="30"
+                                                  placeholder="내용을 입력하세요"></textarea>
+                                    </li>
+
+                                    <li class="file">
+                                        <label for="apvFile">파일</label>
+                                        <input type="file" name="apvFile" id="apvFile">
+                                    </li>
+
+                                    <li>
+                                        <input type="button" value="취소" onclick="history.back();"/>
+                                        <input type="submit" value="작성">
+                                    </li>
+
+
+                                </ul>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</html>

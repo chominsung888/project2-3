@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>index</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script th:src="@{/js/member/memberJoin.js}" defer></script>
+  <script th:src="@{/js/member/address.js}" defer></script>
+  <link rel="stylesheet" th:href="@{/css/member/join.css}">
+</head>
+<div class="container">
+  <div class="join">
+    <img th:src="@{/images/logo.png}" alt="logo" th:onClick="|location.href='@{/}'|" style="cursor:pointer;">
+    <form th:action="@{/member/join}" method="POST" enctype="multipart/form-data" >
+      <div class="join-form">
+        <div class="join-form-con">
+
+          <ul class="big Email">
+          <div class="email" id="email">
+            <img th:src="@{/images/mail.png}" alt="mail">
+            <input type="text" id="userEmail" name="userEmail" maxlength="20" placeholder="이메일(아이디)" oninput="emailCheck()">
+<!--            <select name="userEmail">-->
+<!--              <option value="@story.com">story.com</option>-->
+<!--              <option value="@naver.com">naver.com</option>-->
+<!--              <option value="@nate.com">nate.com</option>-->
+<!--              <option value="@gmail.com">gmail.com</option>-->
+<!--              <option value="@kakao.com">kakao.com</option>-->
+<!--            </select>-->
+          </div>
+          <span id="emailConfirm"></span>
+          </ul>
+
+
+<!--          <button onClick="showPassFn(event)">클릭</button>-->
+
+          <ul class="big password">
+
+          <div class="password" id="password">
+            <img th:src="@{/images/password.png}" alt="password">
+            <input type="password" id="userPw" name="userPw" placeholder="비밀번호" maxlength="20" oninput="passwordCheck()">
+          </div>
+          <div class="password2" id="password2">
+            <img th:src="@{/images/password.png}" alt="password">
+            <input type="password" id="userPwCheck" name="userPwCheck" placeholder="비밀번호확인" maxlength="20" oninput="passwordCheck()">
+          </div>
+          <span id="pwConfirm"></span>
+          </ul>
+
+
+          <ul class="big name">
+          <div class="userName" id="userName">
+            <img th:src="@{/images/name.png}" alt="name" >
+            <input type="text" id="name" name="name" placeholder="이름" maxlength="15" oninput="nameCheck()">
+          </div>
+          <span id="nameConfirm"></span>
+          </ul>
+
+          <div class="address-one">
+            <input type="text" id="postcode" placeholder="우편번호" readonly>
+            <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+          </div>
+          <div class="address-two">
+            <input type="text" id="mainAddress" placeholder="주소" readonly>
+            <input type="text" id="extraAddress" placeholder="참고항목" readonly>
+            <input type="text" id="detailAddress" placeholder="상세주소">
+          </div>
+
+          <div>
+            <img th:src="@{/images/home.png}" alt="home">
+            <input type="text" id="address" name="address" placeholder="주소" readonly>
+          </div>
+
+          <ul class="big phone">
+          <div class="phone" id="phone">
+            <img th:src="@{/images/phoneNumber.png}" alt="phoneNumber">
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="번호" maxlength="15" oninput="phoneNumberCheck()" >
+            <select name="zz" id="zz">
+              <option value="zz">통신사</option>
+              <option value="ZZ">SKT</option>
+              <option value="ZZ">KT</option>
+              <option value="ZZ">LG U+</option>
+            </select>
+          </div>
+            <span id="phoneNumberConfirm"></span>
+          </ul>
+
+
+
+          <div class="fileInput">
+            <label for="memberFile" class="btn">파일업로드</label>
+            <input id="memberFile" name="memberFile" style="display:none;" type="file">
+          </div>
+
+        </div>
+      </div>
+      <div class="ok">
+        <button type="submit" id="joinGo">회원가입완료</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<body>
+</body>
+</html>

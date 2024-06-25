@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 여기에 헤더 정보를 추가하세요 -->
+</head>
+<body>
+<div class="right" th:fragment="freeDetailFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="index-data">
+                <div class="detail">
+                    <div class="detail-con">
+                        <div class="top">
+                            <h1>자유 게시판</h1>
+                            <ul>
+                                <li>
+                                    <div class="freeTitle">
+                                        <span name="freeTitle" id="freeTitle" th:text="${free.freeTitle}"></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span th:text="${#temporals.format(free.createTime, 'yyyy-MM-dd HH:mm')}" id="createTime"></span>
+                                </li>
+                            </ul>
+                            <ul>
+                            <li>
+                                <div class="title-right">
+                                    <img th:src="@{|/upload/${free.memberEntity.memberFileName}|}"
+                                         alt="photo" height="32px">
+                                    <span name="freeWriter" id="freeWriter" th:text="${free.freeWriter}"></span>
+                                    <label for="freeWriter"></label>
+                                </div>
+                            </li>
+                                <li>
+                                    <div class="category-right">
+                                        <label for="freeHit">조회수</label>
+                                        <span name="freeHit" id="freeHit" th:text="${free.freeHit}"></span>
+                                    </div>
+                                    <div class="category">
+                                        <span th:if="${free.category == '본사'}">본사</span>
+                                        <span th:if="${free.category == '노원점'}">노원점</span>
+                                        <span th:if="${free.category == '자동차관'}">자동차관</span>
+                                        <span th:if="${free.category == '야외관'}">야외관</span>
+                                        <span th:if="${free.category == '커플관'}">커플관</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="detail-form">
+
+                                        <th:block th:if="${free.freeAttachFile==1}"> <!-- 이미지 표시 -->
+                                            <img th:src="@{|/upload/${free.newFileName}|}" alt="이미지대체문구">
+                                        </th:block>
+                                        <th:block th:unless="${free.freeAttachFile==1}"> <!-- 이미지 표시 -->
+                                            <img src="https://placehold.co/600x400?text=NOIMAGE" alt="이미지대체문구">
+                                        </th:block>
+                                    </div>
+                        </div>
+                        <div class="bottom1">
+                            <ul>
+                                <li>
+                                    <textarea name="freeContent" id="freeContent" cols="30" rows="3"
+                                              th:text="${free.freeContent}" disabled></textarea>
+                                </li>
+                                <li>
+                                    <input type="hidden" name="memberId" id="memberId" th:value="${free.memberEntity.id}">
+                                </li>
+
+                                <li>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <th:block th:if="${free.memberEntity.userEmail==myUserDetails.username}">
+                                            <a th:href="@{/board/freeUpdate/{id}(id=${free.id})}" class="btn2">수정</a>
+                                        </th:block>
+                                    </th:block>
+                                </li>
+                                <li>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <th:block th:unless="${free.memberEntity.userEmail==myUserDetails.username}">
+                                            <input type="hidden" id="memberId2" th:value="${myUserDetails.memberEntity.id}">
+                                            <a th:href="@{/board/freeList}" class="btn1">목록</a>
+                                        </th:block>
+                                    </th:block>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 댓글 -->
+                <div class="bottom2">
+                    <div class="reply">
+                        <div class="reply-con">
+                            <h1>댓글</h1>
+
+                            <th:block sec:authorize="isAuthenticated()">
+                                <form th:action="@{/reply/freeReplyWrite}" method="post">
+                                    <input type="hidden" id="freeId" name="freeId" th:value="${free.id}" readonly>
+                                    <input type="hidden" name="freeReplyId">
+                                    <input type="text" name="freeReplyWriter" id="freeReplyWriter"
+                                           th:value="${myUserDetails.name}" class="writer" readonly>
+                                    <input type="text" name="freeReplyContent" id="freeReplyContent"
+                                           placeholder="덧글내용" style="width: 500px; background-color:#ccc;">
+                                    <input type="submit" value="댓글작성">
+                                </form>
+                            </th:block>
+
+                            <th:block sec:authorize="isAnonymous()">
+                                <h1>댓글을 작성하려면 <a th:href="@{/member/memberLogin}" class="login">로그인</a> 하세요!</h1>
+                            </th:block>
+
+                            <!-- 댓글 테이블 -->
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>작성자</th>
+                                    <th>내용</th>
+                                    <th>작성시간</th>
+                                </tr>
+                                </thead>
+                                <tbody class="tData">
+                                <tr th:each="freeReply : ${freeReplyDtoList}">
+                                    <td th:text="${freeReply.freeReplyWriter}"></td>
+                                    <td th:text="${freeReply.freeReplyContent}"></td>
+                                    <td th:text="${#temporals.format(freeReply.createTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <th:block sec:authorize="hasAnyRole('ADMIN')">
+                                            <td>
+                                                <a th:href="@{/reply/freeReplyDelete/{id}(id=${freeReply.id})}">삭제</a>
+                                            </td>
+                                        </th:block>
+                                        <th:block th:if="${free.memberEntity.userEmail==myUserDetails.username} or ${freeReply.empReplyWriter==myUserDetails.name}">
+                                            <th:block sec:authorize="hasAnyRole('MEMBER','MANAGER')">
+                                                <td>
+                                                    <a th:href="@{/reply/empReplyDelete/{id}(id=${freeReply.id})}">삭제</a>
+                                                </td>
+                                            </th:block>
+                                        </th:block>
+                                    </th:block>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

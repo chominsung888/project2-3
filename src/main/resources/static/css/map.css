@@ -1,0 +1,85 @@
+@import url(/css/common/reset.css);
+@import url(/css/common/left.css);
+.bottom{
+    padding-left: 100px;
+    padding-right: 160px;
+}
+.hh{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 20px;
+}
+.hh h1:nth-child(1){
+  border: 2px solid rgb(222 223 188);
+     background-color: rgb(62 104 136 / 58%);
+        border-radius: 8px;
+         color: white;
+}
+.hh h1:nth-child(2){
+  border: 2px solid rgb(222 223 188);
+background-color: rgb(62 104 136 / 58%);
+        border-radius: 8px;
+         color: white;
+}
+.hh h1:nth-child(3){
+   border: 2px solid rgb(222 223 188);
+background-color: rgb(62 104 136 / 58%);
+        border-radius: 8px;
+         color: white;
+}
+.hh h1:nth-child(4){
+     border: 2px solid rgb(222 223 188);
+background-color: rgb(62 104 136 / 58%);
+         border-radius: 8px;
+          color: white;
+}
+ .hh h1:nth-child(5){
+   border: 2px solid rgb(222 223 188);
+background-color: rgb(62 104 136 / 58%);
+          border-radius: 8px;
+           color: white;
+}
+.index-data h1{
+padding-bottom: 20px;
+}
+
+.ct table{
+    width: 100%;
+    padding-top: 50px;
+        padding-bottom:50px;
+}
+.ct table tbody{
+color: #ffffff
+
+}
+
+.ct tr{
+border: 1px solid #ccc;
+}
+
+.ct td {
+  padding: 20px;
+  border-top: 1px solid #e2e2e2;
+  font-size: 13px;
+}
+
+.td3{
+  border-bottom: 1px solid #e2e2e2;
+}
+.ct td .txt{
+}
+.txt1{
+margin-bottom: 10px !important;
+}
+
+
+.ct th {
+background-color: rgb(222 223 188);
+  border-top: 1px solid #e2e2e2;
+  color: #333;
+  width: 120px;
+}
+
+
+

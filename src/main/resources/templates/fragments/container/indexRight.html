@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 일별 박스오피스 가져오기</title>
+</head>
+<body>
+<div class="right" th:fragment="indexRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <!--사용자가 인증 되어 있으면 보이는 메뉴 -->
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="index-data">
+                <div class="app">
+                    <div class="apv">
+                        <a th:href="@{/apv/waitList}"> 결재 대기 문서 <br> <span th:text="${apvWaitCount}"></span> </a>
+                        <a th:href="@{/apv/myApvDenyList}"> 반려된 문서 <br> <span th:text="${apvMyDenyCount}"></span> </a>
+                        <a th:href="@{/apv/list}"> 받은 전체 문서 <br> <span th:text="${apvCount}"></span> </a>
+                        <a th:href="@{/apv/write}">문서작성 </a>
+                    </div>
+
+                </div>
+                <div class="movie">
+                    <h3>오늘의 박스오피스</h3>
+                    <div id="movies"></div>
+
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        function fetchBoxOfficeData() {
+                            var xhr = new XMLHttpRequest();
+                            var url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json';
+                            var key = 'a00c456adf2ded3c39df93f44cf40503';
+
+                            var today = new Date();
+                            today.setDate(today.getDate() - 1); // 현재 날짜에서 1일을 뺍니다 (어제의 날짜)
+                            var yyyy = today.getFullYear().toString();
+                            var mm = (today.getMonth() + 1).toString().padStart(2, '0');
+                            var dd = today.getDate().toString().padStart(2, '0');
+                            var targetDt = yyyy + mm + dd; // 어제의 날짜로 설정된 targetDt
+
+                            var queryParams = '?' + encodeURIComponent('key') + '=' + encodeURIComponent(key);
+                            queryParams += '&' + encodeURIComponent('targetDt') + '=' + encodeURIComponent(targetDt);
+
+                            xhr.open('GET', url + queryParams);
+                            xhr.onreadystatechange = function () {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    var response = JSON.parse(this.responseText);
+                                    var movies = response.boxOfficeResult.dailyBoxOfficeList;
+
+                                    var movieList = document.getElementById('movies');
+                                    if (movieList) {
+                                        movieList.innerHTML = ''; // 이전에 추가된 내용을 모두 지우기
+
+                                        movies.forEach(function (movie, index) {
+                                            var movieItem = document.createElement('div');
+                                            var movieRank = document.createElement('span');
+                                            movieRank.textContent = (index + 1) + '. '; // 순위 표시
+                                            movieItem.appendChild(movieRank);
+
+                                            var movieTitle = document.createElement('span');
+                                            movieTitle.textContent = movie.movieNm; // 영화 제목 표시
+                                            movieItem.appendChild(movieTitle);
+
+                                            movieList.appendChild(movieItem);
+                                        });
+                                    }
+                                }
+                            };
+
+                            xhr.send('');
+                        }
+                        document.addEventListener("DOMContentLoaded", fetchBoxOfficeData);
+                        /*]]>*/
+                    </script>
+                </div>
+                <div class="dpt">
+                    <h3>조직도</h3>
+                    <ul>
+                        <th:block th:each="department : ${departments}">
+                            <li>
+                                <span th:text="${department.dptName}"></span>
+                                <ul>
+                                    <th:block th:if="${members!=null}">
+                                        <th:block th:each="member : ${members.get(department.dptName)}">
+                                            <li><span th:text="${member.name}"></span></li>
+                                        </th:block>
+                                    </th:block>
+                                </ul>
+                            </li>
+                        </th:block>
+                    </ul>
+                </div>
+                <div class="att">
+                    <h3>출퇴근</h3>
+                    <div class="attendanceWrite-form">
+                        <ul>
+                            <li>
+                                <input type="hidden" name="id" id="id" th:value="${id}" readonly>
+                            </li>
+                            <li>
+                                <input type="hidden" name="name" id="name" th:value="${name}" readonly>
+                            </li>
+                            <li>
+                                <input type="hidden" name="memberId" id="memberId" th:value="${memberId}" readonly>
+                            </li>
+                            <li>
+                                <div class="button-container">
+                                    <input type="button" name="checkInTimeBtn" id="checkInTimeBtn" value="출근하기">
+                                    <input type="button" name="checkOutTimeBtn" id="checkOutTimeBtn" value="퇴근하기">
+                                </div>
+                                <div id="attendanceInfo">
+                                    <!-- 추가된 정보 표시 영역 -->
+                                </div>
+                            </li>
+
+
+                            <li>
+                                <label for="totalPay">산정 기간 내 총 급여</label>
+                                <input type="text" name="totalPay" id="totalPay" th:value="${pay.totalPay}+' 원'"
+
+                                       style="background-color: #f1f1f100;
+                                            text-align: center;
+                                            color: #dedfbc;
+                                            font-weight:bold; "
+                                       readonly>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="time">
+                    <div class="clock-wrapper">
+                        <img th:src="@{/images/ROLEX.png}" alt="ROLEX" class="ROLEX">
+                    </div>
+                    <div class="currentDate" id="currentDate"></div>
+                    <div class="currentTime" id="currentTime"></div>
+                </div>
+
+
+                <div class="board">
+                    <h3>자유게시판</h3>
+                    <div class="freeHit" th:each="freeHit :${freeHit}">
+                        <ul>
+                            <li><a th:href="@{/board/freeDetail/{id}(id=${freeHit.id})}"><span
+                                th:text="${freeHit.freeTitle}"></span></a></li>
+                            <li>
+                                <span class="freeName" th:text="${freeHit.memberEntity.name}"></span>
+                                <span class="dot">&#8226;</span>
+                                <span class="freeTime"
+                                      th:text="${#temporals.format(freeHit.createTime, 'yyyy-MM-dd')}"></span>
+
+                                조회수<span class="freeHit" th:text="${freeHit.freeHit}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="notice">
+                    <h3>공지사항</h3>
+                    <div class="noticeHit" th:each="noticeHit :${noticeHit}">
+                        <ul>
+                            <li><a th:href="@{/board/noticeDetail/{id}(id=${noticeHit.id})}"><span
+                                th:text="${noticeHit.noticeTitle}"></span></a></li>
+                            <li>
+                                <span class="noticeName" th:text="${noticeHit.memberEntity.name}"></span>
+                                <span class="dot">&#8226;</span>
+                                <span class="noticeTime" th:text="${#temporals.format(noticeHit.createTime, 'yyyy-MM-dd')}"></span>
+                                조회수<span class="noticeHit" th:text="${noticeHit.noticeHit}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="emp">
+                    <h3>이달의 우수사원</h3>
+                    <div class="empHit" th:each="empHit :${empHit}">
+                        <ul>
+                            <li><a th:href="@{/board/empDetail/{id}(id=${empHit.id})}"><span
+                                th:text="${empHit.empTitle}"></span></a></li>
+                            <li>
+                                <span class="empName" th:text="${empHit.memberEntity.name}"></span>
+                                <span class="dot">&#8226;</span>
+                                <span class="empTime" th:text="${#temporals.format(empHit.createTime, 'yyyy-MM-dd')}"></span>
+                                조회수<span class="empHit" th:text="${empHit.empHit}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cal">
+                    <h3>일정</h3>
+                    <ul>
+                        <li>개인 일정:
+                            <div id="personalCalendar">
+                                <!-- 여기에 개인 일정을 표시할 코드를 추가합니다 -->
+                                <ul>
+                                    <!-- personalEvents에 있는 각 일정을 순회하며 표시합니다 -->
+                                    <th:block th:each="event : ${personalEvents}">
+                                        <li th:text="${event.content} + ' - ' + ${event.start} + ' 부터 ' + ${event.end}"></li>
+                                    </th:block>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>전체 일정:
+                            <div id="allCalendar">
+                                <!-- 여기에 전체 일정을 표시할 코드를 추가합니다 -->
+                                <ul>
+                                    <!-- allEvents에 있는 각 일정을 순회하며 표시합니다 -->
+                                    <th:block th:each="event : ${allEvents}">
+                                        <li th:text="${event.content} + ' - ' + ${event.start} + ' 부터 ' + ${event.end}"></li>
+                                    </th:block>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

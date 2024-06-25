@@ -16,7 +16,7 @@ public class ApprovalFileDto {
 
     private String apvNewFileName;
 
-    private String avpOldFileName;
+    private String apvOldFileName;
 
     private ApprovalEntity approvalEntity;
 }

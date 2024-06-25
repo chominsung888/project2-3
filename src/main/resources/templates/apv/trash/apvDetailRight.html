@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="apvDetailRightFragment">
+    <div class="right-con">
+        <div class="top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAnonymous()">
+                        <li><a th:href="@{/member/login}">로그인</a></li>
+                        <li><a th:href="@{/member/Join}">회원가입</a></li>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        로그인중
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="apv-data">
+                <div class="container">
+                    <div class="write">
+                        <div class="write-con">
+                            <form th:action="@{/apv/apvOk}" method="POST" enctype="multipart/form-data">
+                                <h1>보고서 상세보기</h1>
+                                <ul>
+                                    <li>
+                                        <input type="hidden" name="id" id="id" th:value="${approvalDto.id}">
+                                    </li>
+
+                                    <li>
+                                        <label for="apvFnl">결재자
+                                            <input type="text" id="apvFnl" name="apvFnl"
+                                                   th:value="${approvalDto.apvFnl}" readonly>
+                                        </label>
+                                    </li>
+
+                                    <li>
+                                        <label for="approvalDivEntity">보고서 종류
+                                            <input type="text" name="approvalDivEntity1"
+                                                   th:value="${approvalDto.approvalDivEntity.apvDivName}"
+                                                   readonly>
+                                            <input type="hidden" id="approvalDivEntity" name="approvalDivEntity"
+                                                   th:value="${approvalDto.approvalDivEntity.id}">
+                                        </label>
+                                    </li>
+
+                                    <li>
+                                        <label for="memberName">보고서 작성자
+                                            <input type="text" name="memberName" id="memberName"
+                                                   th:value="${approvalDto.memberEntity.name}"
+                                                   readonly>
+                                        </label>
+                                    </li>
+
+                                    <li>
+                                        <input type="hidden" name="memberId" id="memberId"
+                                               th:value="${approvalDto.memberEntity.id}">
+                                    </li>
+
+                                    <li>
+                                        <label for="apvTitle">기안서 제목</label>
+                                        <input type="text" name="apvTitle" id="apvTitle"
+                                               th:value="${approvalDto.apvTitle}"
+                                               readonly>
+                                    </li>
+
+                                    <li>
+                                        <label for="apvContent">기안서 내용</label>
+                                        <textarea name="apvContent" id="apvContent"
+                                                  cols="50" rows="30" readonly>[[${approvalDto.apvContent}]]</textarea>
+                                    </li>
+
+                                    <li>
+                                        <th:block th:if="${approvalDto.apvAttachFile==1}">
+                                            <label for="apvFile">파일</label>
+                                            <input type="file" name="apvFile" id="apvFile"
+                                                   th:text="${approvalDto.apvOldFileName}" readonly>
+                                        </th:block>
+
+                                        <th:block th:unless="${approvalDto.apvAttachFile==1}">
+                                            <label for="apvFile">파일</label>
+                                            <input type="file" name="apvFile" id="apvFile2"
+                                                   th:text="${approvalDto.apvOldFileName}" readonly hidden="hidden">
+                                        </th:block>
+
+                                        <forEach items="${fileList}" var="file">
+                                            <a th:href="@{apv/fileDown}">${file} 파일 다운로드</a><br>
+                                        </forEach>
+
+                                    </li>
+
+                                    <li>
+                                        <label for="createTime">작성 시간</label>
+                                        <input type="text"
+                                               th:value="${#temporals.format(approvalDto.createTime, 'yyyy-MM-dd HH:mm')}"
+                                               id="createTime" readonly>
+                                    </li>
+
+                                    <li>
+                                        <label for="updateTime">수정 시간</label>
+                                        <input type="text"
+                                               th:value="${#temporals.format(approvalDto.updateTime, 'yyyy-MM-dd HH:mm')}"
+                                               id="updateTime" readonly>
+                                    </li>
+
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <li>
+                                            <th:block
+                                                th:if="${approvalDto.memberEntity.id==myUserDetails.memberEntity.id}">
+                                                <a th:href="@{/apv/apvUpdate/{id}(id=${approvalDto.id})}">수정</a>
+                                                <a th:href="@{/apv/apvDelete/{id}(id=${approvalDto.id})}">삭제</a>
+                                                <input type="button" value="취소" onclick="history.back();"/>
+                                            </th:block>
+                                            <th:block
+                                                th:unless="${approvalDto.memberEntity.id==myUserDetails.memberEntity.id}">
+                                                <input type="button" value="취소" onclick="history.back();"/>
+                                            </th:block>
+                                        </li>
+                                    </th:block>
+
+                                    <li>
+                                        <th:block th:if="${approvalDto.apvFnl==myUserDetails.name}">
+                                            <textarea name="apvCom" id="apvCom" cols="20" rows="20"
+                                                      placeholder="내용을 입력하세요"></textarea>
+                                            <label for="approvalStatusEntity">진행 상태</label>-->
+                                            <select class="select_type01 w170" th:name="approvalStatusEntity"
+                                                    id="approvalStatusEntity">
+                                                <option value="선택"> 선택</option>
+                                                <option th:each="apvStatus : ${approvalStatusDtoList}"
+                                                        th:value="${apvStatus?.id}"
+                                                        th:utext="${apvStatus?.apvStatus}"></option>
+                                            </select>
+                                            <input type="submit" value="상신">
+                                        </th:block>
+                                    </li>
+
+<!--                                    <li>-->
+<!--                                        <th:block th:if="${approvalDto.apvFnl==myUserDetails.name}">-->
+<!--                                            <label for="approvalStatusEntity">진행 상태</label>&ndash;&gt;-->
+<!--                                            <select class="select_type01 w170" th:name="approvalStatusEntity"-->
+<!--                                                    id="approvalStatusEntity">-->
+<!--                                                <option value="선택"> 선택</option>-->
+<!--                                                <option th:each="apvStatus : ${approvalStatusDtoList}"-->
+<!--                                                        th:value="${apvStatus?.id}"-->
+<!--                                                        th:utext="${apvStatus?.apvStatus}"></option>-->
+<!--                                            </select>-->
+<!--                                        </th:block>-->
+<!--                                    </li>-->
+
+<!--                                    <li>-->
+<!--                                        <input type="submit" value="상신">-->
+<!--                                    </li>-->
+
+
+                                </ul>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!--    <div class="block">-->
+<!--        <div id="modal1" class="modal">-->
+
+<!--            <p>승인 여부</p>-->
+<!--            <textarea cols="10" rows="10"> 내용 </textarea>-->
+
+<!--            <button onClick="testFn()">테스트</button>-->
+<!--            <a href="#" rel="modal:close">닫기</a>-->
+
+<!--        </div>-->
+<!--        &lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--        <p><a href="#modal1" rel="modal:open">결재 선택</a></p>-->
+
+
+<!--        <input type="text" value="43524624" id="test1">-->
+<!--        <input type="text" id="test2">-->
+
+
+<!--    </div>-->
+
+
+</html>
+
+
+
+
+
+
+
+
+

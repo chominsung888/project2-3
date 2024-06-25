@@ -1,0 +1,88 @@
+.blocker{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    z-index: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.blocker:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.05em;
+}
+
+#modal4{
+display: none;
+    vertical-align: middle;
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    box-sizing: border-box;
+    width: 90%;
+    background: #fff;
+    padding: 15px 30px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -o-border-radius: 8px;
+    -ms-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 10px #000;
+    -moz-box-shadow: 0 0 10px #000;
+    -o-box-shadow: 0 0 10px #000;
+    -ms-box-shadow: 0 0 10px #000;
+    box-shadow: 0 0 10px #000;
+    text-align: left;
+}
+#modal4 a{
+display:none;
+}
+
+
+
+
+/*222222222*/
+.modal2 {
+  display: none; /* 모달창 기본 숨김 */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* 배경 불투명도 조절 */
+}
+
+/* 모달 내용 스타일 */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* 모달 닫기 버튼 스타일 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

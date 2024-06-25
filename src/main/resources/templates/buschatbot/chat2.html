@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Bot</title>
+  <link rel="stylesheet" th:href="@{/css/chatBot/chat-bot.css}">
+  <link rel="stylesheet" th:href="@{/css/chatBot/modal.css}">
+  <link rel="stylesheet" th:href="@{/css/chatBot/busStation.css}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <script th:src="@{/js/chatbot/busChat.js}" defer></script>
+  <script th:src="@{/js/chatbot/mode.js}" defer></script>
+</head>
+<body>
+<div class="bot-con">
+  <div id="chat-bot">
+    <div class="wrap">
+      <button type="button" id="btn-chat-open" onclick="openChat()">Bot-GO</button>
+      <div id="chat-disp">
+        <h3 id="chat-header">
+          <span>CHAT_BOT</span>
+          <span class="btn-wrap">
+				<button type="button" id="btn-chat-close" onclick="disconnect()">X</button>
+			</span>
+        </h3>
+        <div id="chat-content">
+
+
+        </div>
+
+        <div class="answerKeyword">
+          <div class="keyword1">
+            <button class="keyBtn1" onclick="keyBus()">버스검색</button>
+          </div>
+          <div class="keyword2">
+            <button class="keyBtn2" onClick="keyStation()">정류장검색</button>
+          </div>
+        </div>
+
+
+        <div id="chat-question" class="flex between" style="visibility: hidden;">
+
+
+          <span class="flex column center"><i></i></span>
+          <input type="text" id="question" placeholder="" value="">
+          <input type="text" id="question2" hidden="hidden">
+          <button type="button" id="btn-msg-send" onclick="btnMsgSendClicked()">
+            <img th:src="@{/image/icon/enter.png}" alt="입력">
+          </button>
+          <button onClick="openChat()">
+            <img th:src="@{/image/icon/delete.png}" alt="비우기">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

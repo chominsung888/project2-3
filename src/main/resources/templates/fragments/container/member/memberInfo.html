@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="memberInfoRightFragment">
+  <div class="right-con">
+    <div class="right-top">
+      <div class="gnb">
+        <ul>
+          <th:block sec:authorize="isAuthenticated()">
+            <div class="myInfo"
+                 th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+              <li>
+                <a th:text="${#authentication.principal.department}"></a>
+                <a th:text="${#authentication.principal.mRank}"></a>
+                <a th:text="${#authentication.principal.name}"></a>
+                <p>님</p>
+              </li>
+            </div>
+            <li>
+
+            </li>
+            <li><a th:href="@{/logout}">로그아웃</a></li>
+          </th:block>
+          <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+            <a th:href="@{/my/schedule}">Fullcalendar</a>
+          </li>
+          <li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="index-data">
+        <div class="memberInfo">
+          <div class="memberInfo-con">
+            <div class="up">
+
+
+              <th:block th:if="${member.memberAttachFile==1}">
+                <img th:src="@{|/upload/${member.memberNewFileName}|}" alt="이미지대체문구">
+              </th:block>
+              <th:block th:unless="${member.memberAttachFile==1}">
+                <img th:src="@{/images/memberProfile.png}" alt="이미지대체문구">
+              </th:block>
+            </div>
+            <div class="down">
+              <ul>
+                <span th:text="${member.id}" id="id" name="id" hidden="hidden"></span>
+                <div class="info">
+                  <label for="userEmail">이메일</label>
+                  <li>
+                    <span th:text="${member.userEmail}" id="userEmail" name="userEmail"></span>
+                  </li>
+                </div>
+
+                <div class="info">
+                  <label for="name">이름</label>
+                  <li>
+                    <span th:text="${member.name}" id="name" name="name"></span>
+                  </li>
+                </div>
+
+                <div class="info">
+                  <label for="address">주소</label>
+
+                  <li>
+                    <span th:text="${member.address}" id="address" name="address"></span>
+                  </li>
+                </div>
+
+                <div class="info">
+                  <label for="phoneNumber">번호</label>
+                  <li>
+                    <span th:text="${member.phoneNumber}" id="phoneNumber" name="phoneNumber"></span>
+                  </li>
+                </div>
+
+
+
+
+                <div class="info">
+                  <label for="createTime">가입일</label>
+                  <li>
+                    <span th:text="${#temporals.format(member.createTime, 'yy년MM월dd일 HH시mm분')}" id="createTime" name="createTime"></span>
+                  </li>
+                </div>
+
+                  <input type="hidden" name="id" th:value="${member.id}">
+                  <div class="info">
+                    <label for="department">부서</label>
+                <li>
+                  <div class="modalgogo">
+                    <span th:text="${member.department}"></span>
+                  <button id="modalBtn1">변경</button>
+                  </div>
+
+                  <div id="myModal1" class="modal1">
+                    <div class="modal-content1">
+                      <span class="close1">&times;</span>
+
+                      <div class="departModal">
+                      <form id="departmentForm" method="post">
+                      <input type="hidden" th:value="${member.id}" id="memberId2">
+                      <select id="department" name="department">
+                        <option th:each="de : ${depart}" th:value="${de.dptName}"
+                                th:text="${de.dptName}">
+                        </option>
+                      </select>
+                      </form>
+                      <button type="button" onclick="memberDepartmentUpdateFn()">변경</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </li>
+
+                  <div class="info">
+                    <label for="mRank">직급</label>
+                  <li>
+                  <div class="modalgogo">
+                    <span th:text="${member.mRank}"></span>
+                    <button id="modalBtn2">변경</button>
+                  </div>
+
+                    <div id="myModal2" class="modal2">
+                      <div class="modal-content2">
+                        <span class="close2">&times;</span>
+                        <div class="mRankModal">
+
+                        <form id="mRankForm" method="post">
+                        <input type="hidden" th:value="${member.id}" id="memberId3">
+                        <select id="mRank" name="mRank">
+                          <option th:each="re : ${rank}" th:value="${re.rankName}"
+                                  th:text="${re.rankName}">
+                          </option>
+                        </select>
+                        </form>
+                      <button type="button" onclick="memberMRankUpdateFn()">변경</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </li>
+
+
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="gb">
+
+        <div class="gogo">
+          <button onClick="memberDeleteReady()">해고</button>
+        </div>
+        <div class="back">
+          <a th:href="@{/member/memberList}">목록으로</a>
+        </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</html>

@@ -1,8 +1,8 @@
 package org.spring.codingStory.board.freeBoard.dto;
 
 import lombok.*;
-import org.spring.codingStory.board.employee.entity.EmployeeEntity;
 import org.spring.codingStory.board.freeBoard.entity.FreeEntity;
+import org.spring.codingStory.board.freeBoard.entity.FreeReplyEntity;
 
 import java.time.LocalDateTime;
 
@@ -29,4 +29,15 @@ public class FreeReplyDto {
     private LocalDateTime updateTime;
 
 
+    public static FreeReplyDto toSelectReplyDto(FreeReplyEntity freeReplyEntity) {
+        FreeReplyDto freeReplyDto=new FreeReplyDto();
+        freeReplyDto.setId(freeReplyEntity.getId());
+        freeReplyDto.setFreeReplyContent(freeReplyEntity.getFreeReplyContent());
+        freeReplyDto.setFreeEntity(freeReplyEntity.getFreeEntity());
+        freeReplyDto.setFreeReplyWriter(freeReplyEntity.getFreeReplyWriter());
+        freeReplyDto.setCreateTime(freeReplyEntity.getCreateTime());
+        freeReplyDto.setUpdateTime(freeReplyEntity.getUpdateTime());
+
+        return freeReplyDto;
+    }
 }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="weatherApiRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="attendanceWrite-con">
+
+                <h1>날씨~~</h1>
+                <br>
+
+                <div class="weather_chatbot">
+                    <li class="menuGo" onclick="openWeatherChatbot()">
+<!--                        <img th:src="@{/images/chat-bot.png}" alt="icon">-->
+                        <a>챗봇</a>
+                    </li>
+                </div>
+
+                <script>
+                    function openWeatherChatbot() {
+                        var width = 410; // 채팅 창에 맞게 크기를 조정합니다.
+                        var height = 820; // 채팅 창에 맞게 크기를 조정합니다.
+                        var left = (screen.width / 2) - (width / 2);
+                        var top = (screen.height / 2) - (height / 2);
+                        window.open('/weather/index', 'WeatherChatbot', `width=${width},height=${height},top=${top},left=${left}`);
+                    }
+                </script>
+
+
+                <div class="search">
+                    <select name="search" id="search">
+                        <option value="Songpa">본점
+                            <!--[송파]-->
+                            <!--위도 37.514856398566735, 경도 127.10323168435833-->
+                        </option>
+                        <option value="Nowon">노원점
+                            <!--[노원]-->
+                            <!--위도 37.65496749140469, 경도 127.061297075607-->
+                        </option>
+                        <option value="Paju">자동차관
+                            <!--[파주]-->
+                            <!--위도 37.83472924837163, 경도 126.73551132667517-->
+                        </option>
+                        <option value="Gangbuk">야외관
+                            <!--[강북]-->
+                            <!--위도 37.62227771123334, 경도 127.0397961958558-->
+                        </option>
+                        <option value="Mapo">커플관
+                            <!--[마포]-->
+                            <!--위도 37.557641983466915, 경도 126.92587776948747-->
+                        </option>
+                    </select>
+                    <button onclick="weatherSearch()">날씨조회</button>
+                </div>
+
+                <div class="weather-data">
+
+
+                <div class="data">
+                    <!--도시이름: <span id="city" hidden></span> <br>-->
+                    최고기온: <span id="temp_max"></span>&deg;C <br>
+                    최저기온: <span id="temp_min"></span>&#176;C <br>
+                    습도: <span id="humidity"></span>% <br>
+                    날씨 아이콘: <img id="weather_icon" src="" alt="날씨 아이콘"> <br>
+
+                    대기: <span id="description"></span> <br>
+                    현재기온: <span id="temp"></span>&deg;C <br>
+                    바람: <span id="speed"></span>m/s <br>
+                    구름양: <span id="clouds_all"></span>% <br>
+
+
+
+
+                </div>
+
+                <div id="map" class="weather-map" style="width:600px;height:400px;"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</html>

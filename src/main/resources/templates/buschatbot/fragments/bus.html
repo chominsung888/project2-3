@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<div class="part-bus" th:if="${msg.answer.bus != null}" th:fragment="busFragment">
+  <div class="part-bus" th:if="${msg.answer.bus != null}">
+    <div class="part-out">
+      <div class="part-base">
+        <li class="part-busRouteNm">
+          <div class="part-busRouteNm-1">
+          <div th:if="${msg.answer.bus.routeType} == '1'">
+            <h2 class="rhdgkd">공항</h2>
+          </div>
+          <div th:if="${msg.answer.bus.routeType} == '2'">
+            <h2 class="akdmf">마을</h2>
+          </div>
+          <div th:if="${msg.answer.bus.routeType} == '3'">
+            <h2 class="rkstjs">간선</h2>
+          </div>
+          <div th:if="${msg.answer.bus.routeType} == '4'">
+            <h2 class="wltjs">지선</h2>
+          </div>
+          <div th:if="${msg.answer.bus.routeType} == '5'">
+            <h2 class="tnsghks">순환</h2>
+          </div>
+          <div th:if="${msg.answer.bus.routeType} == '6'">
+            <h2 class="rhkddur">광역</h2>
+          </div>
+          <div th:if="${msg.answer.bus.routeType} == '7'">
+            <h2 class="dlscjs">인천</h2>
+          </div>
+          <div th:if="${msg.answer.bus.routeType} == '8'">
+            <h2 class="rudrl">경기</h2>
+          </div>
+          <div th:if="${msg.answer.bus.routeType} == '9'">
+            <h2 class="vPwl">폐지</h2>
+          </div>
+          <div th:if="${msg.answer.bus.routeType} == '0'">
+            <h2 class="rhddyd">공용</h2>
+          </div>
+          <span th:text="${msg.answer.bus.busRouteNm}" style="font-size:17px; color:#4D4D4D;"></span>
+          </div>
+<!--          <input type="button" class="stationButton" value="정류장 출력" id="modalBtn"></input>-->
+          <input type="button" class="stationButton" value="정류장 출력" th:onclick="stationDetail([[${msg.answer.bus.busRouteId}]])"></input>
+
+          <div id="myModal" class="modal">
+            <div class="modal-content" id="modal-content">
+              <span class="close" style="font-size:28px;" onClick="modalClose()">&times;</span>
+              <div class="rhdqor">
+                <div th:if="${msg.answer.bus.routeType} == '1'">
+                  <h2 class="rhdgkd">공항</h2>
+                </div>
+                <div th:if="${msg.answer.bus.routeType} == '2'">
+                  <h2 class="akdmf">마을</h2>
+                </div>
+                <div th:if="${msg.answer.bus.routeType} == '3'">
+                  <h2 class="rkstjs">간선</h2>
+                </div>
+                <div th:if="${msg.answer.bus.routeType} == '4'">
+                  <h2 class="wltjs">지선</h2>
+                </div>
+                <div th:if="${msg.answer.bus.routeType} == '5'">
+                  <h2 class="tnsghks">순환</h2>
+                </div>
+                <div th:if="${msg.answer.bus.routeType} == '6'">
+                  <h2 class="rhkddur">광역</h2>
+                </div>
+                <div th:if="${msg.answer.bus.routeType} == '7'">
+                  <h2 class="dlscjs">인천</h2>
+                </div>
+                <div th:if="${msg.answer.bus.routeType} == '8'">
+                  <h2 class="rudrl">경기</h2>
+                </div>
+                <div th:if="${msg.answer.bus.routeType} == '9'">
+                  <h2 class="vPwl">폐지</h2>
+                </div>
+                <div th:if="${msg.answer.bus.routeType} == '0'">
+                  <h2 class="rhddyd">공용</h2>
+                </div>
+                <p th:text="${msg.answer.bus.busRouteNm}" style="color:#000; font-size:25px; font-weight:bold;"></p>
+                <h3 style="color:#6a6565; font-size:16px; font-weight:bold;">번</h3>
+              </div>
+              <div class="stationTime">
+                <table class="time-table">
+                  <tbody>
+                  <tr>
+                    <th scope="row">기점</th>
+                    <td th:text="${msg.answer.bus.stStationNm}" colspan="2"></td>
+                    <th scope="row">종점</th>
+                    <td th:text="${msg.answer.bus.edStationNm}" colspan="2"></td>
+                    <th scope="row">회사정보</th>
+                    <td th:text="${msg.answer.bus.corpNm}" colspan="2"></td>
+                  </tr>
+                  <tr>
+                    <th rowspan="3" scope="row">배차간격</th>
+                    <th scope="row">평일</th>
+                    <td th:text="${msg.answer.bus.term + '분'}"></td>
+                    <th scope="row" rowspan="3">첫차</th>
+                    <th scope="row">평일</th>
+                    <td th:text="${#strings.substring(msg.answer.bus.firstBusTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.firstBusTm, 10, 12)}"></td>
+                    <th scope="row" rowspan="3">막차</th>
+                    <th scope="row">평일</th>
+                    <td th:text="${#strings.substring(msg.answer.bus.lastLowTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.lastLowTm, 10, 12)}"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">토요일</th>
+                    <td th:text="${msg.answer.bus.term + '분'}"></td>
+                    <th scope="row">토요일</th>
+                    <td th:text="${#strings.substring(msg.answer.bus.firstBusTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.firstBusTm, 10, 12)}"></td>
+                    <th scope="row">토요일</th>
+                    <td th:text="${#strings.substring(msg.answer.bus.lastLowTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.lastLowTm, 10, 12)}"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">공휴일</th>
+                    <td th:text="${msg.answer.bus.term + '분'}"></td>
+                    <th scope="row">공휴일</th>
+                    <td th:text="${#strings.substring(msg.answer.bus.firstBusTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.firstBusTm, 10, 12)}"></td>
+                    <th scope="row">공휴일</th>
+                    <td th:text="${#strings.substring(msg.answer.bus.lastLowTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.lastLowTm, 10, 12)}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+
+
+              <div class="stationGo">
+                <button th:onclick="stationPost([[${msg.answer.bus.busRouteId}]])" id="stationBtn" hidden="hidden">asdsa</button>
+                <script>
+                  $('#stationBtn')[0].click();
+                </script>
+              </div>
+            </div>
+          </div>
+          <script>
+            var modalBtn = document.getElementById("modalBtn");
+            var modal = document.getElementById("myModal");
+
+            modalBtn.onclick = function() {
+            modal.style.display = "block";
+
+            };
+
+            var closeBtn = modal.querySelector(".close");
+            closeBtn.onclick = function() {
+            modal.style.display = "none";
+            };
+          </script>
+        </li>
+
+        <li class="part-leftright">
+          <span th:text="${msg.answer.bus.stStationNm}"></span>
+          &#8596;
+          <span th:text="${msg.answer.bus.edStationNm}"></span>
+        </li>
+        <li>
+          <span th:text="${msg.answer.bus.corpNm}"></span>
+        </li>
+      </div>
+      <table class="part-table">
+        <thead>
+        <tr>
+          <th>구분</th>
+          <th>평일</th>
+          <th>토요일</th>
+          <th>공휴일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>배차</td>
+          <td th:text="${msg.answer.bus.term + '분'}"></td>
+          <td th:text="${msg.answer.bus.term + '분'}"></td>
+          <td th:text="${msg.answer.bus.term + '분'}"></td>
+        </tr>
+        <td>첫차</td>
+        <td th:text="${#strings.substring(msg.answer.bus.firstBusTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.firstBusTm, 10, 12)}"></td>
+        <td th:text="${#strings.substring(msg.answer.bus.firstBusTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.firstBusTm, 10, 12)}"></td>
+        <td th:text="${#strings.substring(msg.answer.bus.firstBusTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.firstBusTm, 10, 12)}"></td>
+        <tr>
+        </tr>
+        <tr>
+          <td>막차</td>
+          <td th:text="${#strings.substring(msg.answer.bus.lastLowTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.lastLowTm, 10, 12)}"></td>
+          <td th:text="${#strings.substring(msg.answer.bus.lastLowTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.lastLowTm, 10, 12)}"></td>
+          <td th:text="${#strings.substring(msg.answer.bus.lastLowTm, 8, 10) + ':' + #strings.substring(msg.answer.bus.lastLowTm, 10, 12)}"></td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class="part" th:if="${msg.answer.bus.busRouteNm == null}">
+    <p>
+      존재하지 .
+    </p>
+  </div>
+</div>
+
+</html>

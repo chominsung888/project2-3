@@ -1,0 +1,176 @@
+@import url(/css/common/reset.css);
+@import url(/css/common/left.css);
+
+/* 전체 페이지 스타일 */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail .detail-con {
+   width: 1500px;
+   padding: 20px;
+   box-sizing: border-box
+}
+
+.top {
+    margin-bottom: 20px;
+}
+
+.top h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.top ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+.top ul:nth-child(2) {
+display: flex;
+justify-content: space-between;
+}
+.top ul:nth-child(3) {
+display: flex;
+justify-content: space-between;
+}
+
+.top ul li {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.detail-form {
+    display: flex;
+    justify-content: space-between;
+}
+.bottom1 li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.category,
+.category-right {
+    display: inline-block;
+    font-size: 14px;
+    padding: 5px 10px;
+    border: 1px solid rgb(222 223 188);
+    border-radius: 5px;
+   background-color: rgb(62 104 136 / 58%);
+   color:white;
+}
+
+.category-right {
+    margin-left: 10px;
+}
+
+.title-right img {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.btn1,
+.btn2 {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn1 {
+    background-color: #ffc314;
+}
+
+.btn2 {
+    background-color: #004c7e;
+}
+
+/* 댓글 */
+.bottom2 {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.reply{
+width: 1460px;
+}
+
+.reply-con h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.reply-con form {
+    margin-bottom: 20px;
+    display:flex;
+    justify-content:center;
+}
+
+.reply-con form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: #28578000;
+        border: none;
+        text-align: end;
+        width: 100px;
+        color: white;
+}
+
+.reply-con form input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #ffc314;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+}
+
+.reply-con table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    color:white;
+}
+
+.reply-con th,
+.reply-con td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.reply-con th {
+    background-color:rgb(222 223 188);
+}
+
+
+

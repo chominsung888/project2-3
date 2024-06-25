@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<div class="flex-center-date" th:if="${msg.today}" th:text="${msg.today}"></div>
+	<div class="msg-bot-flex">
+		<div  class="icon">
+			<img th:src="@{/images/icon/chatbot.jpg}"> <p>버스 봇</p>
+		</div>
+		<div class="message" >
+			<div class="part" th:if="${msg.answer.keyword ne '버스' or msg.answer.keyword ne '정류장' or  msg.answer.bus != null}">
+				<p th:utext="${msg.answer.content}"></p>
+			</div>
+			<div th:if="${msg.answer.keyword eq '버스'}" >
+				<div th:replace="~{buschatbot/fragments/bus :: busFragment}"></div>
+			</div>
+
+			<div th:if="${msg.answer.keyword eq '정류장'}" >
+				<div th:replace="~{buschatbot/fragments/busStation :: busStationFragment}"></div>
+			</div>
+
+			<div class="time" th:text="${msg.time}">메세지 작성 시간</div>
+		</div>
+	</div>
+</html>

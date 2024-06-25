@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout/map4_Layout}" ><!-- 기본레이아웃  -->
+<!-- head layout 설정된  fragment-->
+<th:block layout:fragment="title">
+    <title>admin </title>
+</th:block>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/map.css}">
+</th:block>
+
+<th:block layout:fragment="script">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ceb7c2ce8c4122181fed2db2c753ee12"></script>
+    <!--  <script th:src="${/js/자바스크립트.js}"></script>-->
+</th:block>
+</html>

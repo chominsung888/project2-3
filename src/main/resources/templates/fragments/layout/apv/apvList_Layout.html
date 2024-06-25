@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragments/common/head :: headFragment}"></head>
+<body>
+<th:block layout:fragment="container"><!-- 각페이지의 컨텐츠  -->
+    <div class="container">
+        <div class="index">
+            <div class="left" th:replace="~{fragments/container/indexLeft :: indexLeftFragment}"></div>
+            <div class="right" th:replace="~{fragments/container/approval/apvListRight :: apvListRightFragment}"></div>
+        </div>
+    </div>
+</th:block>
+</body>
+
+</html>

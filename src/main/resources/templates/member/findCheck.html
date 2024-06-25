@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>index</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <script th:src="@{/js/member/findCheck.js}" defer></script>
+  <link rel="stylesheet" th:href="@{/css/member/findCheck.css}">
+</head>
+<div class="container">
+  <div class="login">
+    <img th:src="@{/images/logo.png}" alt="logo" th:onClick="|location.href='@{/}'|">
+    <div class="login-con">
+      <div class="find">
+
+        <h2>
+          비밀번호를 재설정합니다
+        </h2>
+        <p>
+          비밀번호를 재설정할 <br>
+          계정을 입력해주세요
+        </p>
+
+      <form th:action="@{/member/findCheck}" method="POST">
+        <h5>이메일계정</h5>
+        <input type="text" id="userEmail" name="userEmail" placeholder="이메일 입력">
+        <input type="text" id="name" name="name" placeholder="이름">
+        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="번호">
+
+        <div class="next">
+        <button onClick="findPasswordFn(event)">다음</button>
+<!--          <button type="submit">다음</button>-->
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<body>
+</body>
+</html>

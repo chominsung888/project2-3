@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<div class="part" th:if="${msg.answer.phone != null}" th:fragment="emailFragment">
+    <div class="part2" th:if="${msg.answer.phone != null}">
+        <p class="answer">
+            <span th:text="${'이름: ' + msg.answer.phone.memberName}"></span>
+            <!--      <span th:text="${'부서 ' + msg.answer.phone.deptName}"></span>&nbsp;:-->
+            <span th:text="${', 이메일: ' + msg.answer.phone.email}"></span>
+        </p>
+    </div>
+    <div class="part" th:if="${msg.answer.phone == null}">
+        <p>
+            존재하지 않는 사원입니다.
+        </p>
+    </div>
+</div>
+</html>

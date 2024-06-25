@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        $(document).ready(function(){
+            var url = 'http://api.kcisa.kr/openapi/service/rest/meta/KFApost'; /*URL*/
+            var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + '6f697d23-0a82-4519-aba4-4ee218d7eccb'; /*서비스키*/
+            queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('30'); /*세션당 요청레코드수*/
+            queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('10000'); /*페이지수*/
+
+            $.ajax({
+                url: url + queryParams,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    $(response).find('item').each(function(){
+                        console.log("title: " + $(this).find("title").text());
+                        console.log("alternativeTitle: " + $(this).find("alternativeTitle").text());
+                        console.log("creator: " + $(this).find("creator").text());
+                        console.log("regDate: " + $(this).find("regDate").text());
+                        console.log("collectionDb: " + $(this).find("collectionDb").text());
+                        console.log("subjectCategory: " + $(this).find("subjectCategory").text());
+                        console.log("subjectKeyword: " + $(this).find("subjectKeyword").text());
+                        console.log("extent: " + $(this).find("extent").text());
+                        console.log("description: " + $(this).find("description").text());
+                        console.log("spatialCoverage: " + $(this).find("spatialCoverage").text());
+                        console.log("temporal: " + $(this).find("temporal").text());
+                        console.log("person: " + $(this).find("person").text());
+                        console.log("language: " + $(this).find("language").text());
+                        console.log("sourceTitle: " + $(this).find("sourceTitle").text());
+                        console.log("rights: " + $(this).find("rights").text());
+                        console.log("copyrightOthers: " + $(this).find("copyrightOthers").text());
+                        console.log("uci: " + $(this).find("uci").text());
+                        console.log("contributor: " + $(this).find("contributor").text());
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('status: ' + xhr.status);
+                    console.error('error: ' + error);
+                }
+            });
+        });
+    </script>
+    <div id="result"></div> <!-- 결과를 표시할 곳 -->
+
+    <script>
+        $(document).ready(function(){
+            var url = 'http://api.kcisa.kr/openapi/service/rest/meta/KFApost'; /*URL*/
+            var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + '6f697d23-0a82-4519-aba4-4ee218d7eccb'; /*서비스키*/
+            queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('3'); /*세션당 요청레코드수*/
+            queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /*페이지수*/
+
+            $.ajax({
+                url: url + queryParams,
+                type: 'GET',
+                dataType: 'xml',
+                success: function(response) {
+                    var resultHtml = ''; // 결과를 담을 변수
+                    $(response).find('item').each(function(){
+                        resultHtml += "<p>제목: " + $(this).find("title").text() + "</p>";
+                        resultHtml += "<p>영어제목: " + $(this).find("alternativeTitle").text() + "</p>";
+                        // 나머지 필드들도 위와 같이 추가
+                    });
+                    // 결과를 #result 요소에 추가
+                    $('#result').html(resultHtml);
+                },
+                error: function(xhr, status, error) {
+                    console.error('status: ' + xhr.status);
+                    console.error('error: ' + error);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

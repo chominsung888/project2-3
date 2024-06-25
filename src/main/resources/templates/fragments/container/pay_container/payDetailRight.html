@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="payDetailRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-bottom">
+
+
+            <form th:action="@{/pay/payUpdate}" method="post" enctype="multipart/form-data">
+                <h1 style="font-style: bold; color: #fff;">급여명세서</h1>
+
+                <ul class="form-list">
+
+                        <!--<label for="id"></label>-->
+                        <input type="hidden" name="id" id="id" th:value="${pay.id}" readonly>
+
+
+                        <!--<label for="paymentId"></label>-->
+                        <input type="hidden" name="paymentId" id="paymentId" th:value="${pay.paymentEntity.id}" readonly>
+
+                    <li>
+                        <label for="memberId">사원ID</label>
+                        <input type="text" name="memberId" id="memberId" th:value="${pay.memberEntity.id}" readonly>
+                    </li>
+                    <li>
+                        <label for="startDate">산정 시작일</label>
+                        <input type="datetime-local" name="startDate" id="startDate" th:field="*{pay.startDate}">
+                    </li>
+                    <li>
+                        <label for="endDate">산정 종료일</label>
+                        <input type="datetime-local" name="endDate" id="endDate" th:field="*{pay.endDate}">
+                    </li>
+                    <li>
+                        <label for="calcTime">산정 기간 내 근로 시간 합산</label>
+                        <input type="text" name="calcTime" id="calcTime" th:value="${pay.calcTime}" readonly>
+                    </li>
+                    <li>
+                        <label for="payInDur">산정 기간 내 급여 합산</label>
+                        <input type="text" name="payInDur" id="payInDur" th:value="${pay.payInDur}" readonly>
+                    </li>
+                    <li>
+                        <label for="payBns">보너스</label>
+                        <input type="text" name="payBns" id="payBns" th:value="${pay.payBns}">
+                    </li>
+                    <li>
+                        <label for="totalPay">산정 기간 내 총 급여</label>
+                        <input type="text" name="totalPay" id="totalPay" th:value="${pay.totalPay}+' 원'" readonly>
+                    </li>
+                    <li>
+                        <label for="payingDate">지급 날짜</label>
+                        <input type="date" name="payingDate" id="payingDate" th:value="${pay.payingDate}">
+                    </li>
+
+                    <th:block sec:authorize="hasRole('ADMIN')">
+                    <li class="submit-cell">
+                        <input type="submit" value="수정">
+                    </li>
+                    </th:block>
+
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

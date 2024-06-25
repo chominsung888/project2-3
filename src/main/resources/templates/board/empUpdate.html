@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout/board/empUpdate_Layout}" ><!-- 기본레이아웃  -->
+<!-- head layout 설정된  fragment -->
+<th:block layout:fragment="title">
+    <title>admin </title>
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/board/empUpdate.css}">
+
+</th:block>
+<th:block layout:fragment="script">
+    <!--  <script th:src="${/js/자바스크립트.js}"></script>-->
+</th:block>
+</html>

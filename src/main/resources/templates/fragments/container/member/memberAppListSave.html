@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="memberAppListRightFragment">
+  <div class="right-con">
+    <div class="right-top">
+      <div class="gnb">
+        <ul>
+          <th:block sec:authorize="isAnonymous()">
+            <li><a th:href="@{/login}">로그인</a></li>
+            <li><a th:href="@{/member/join}">회원가입</a></li>
+          </th:block>
+          <th:block sec:authorize="isAuthenticated()">
+            <div class="myInfo"
+                 th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+              <li>
+                <p th:text="${#authentication.principal.memberEntity.department}"></p>부
+              </li>
+              <li>
+                <p th:text="${#authentication.principal.memberEntity.mRank}"></p>
+              </li>
+              <li>
+                <p th:text="${#authentication.principal.memberEntity.name}"></p>님
+              </li>
+            </div>
+            <li><a th:href="@{/logout}">로그아웃</a></li>
+          </th:block>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="index-data">
+        <div class="list">
+          <p>가입대기자 [[${total}]] 명 있습니다</p>
+          <div class="list-con">
+            <div th:each="member: ${memberDto}" class="card">
+              <div class="card-up">
+                <th:block th:if="${member.memberAttachFile==1}">
+                  <img th:src="@{|/upload/${member.memberNewFileName}|}" alt="이미지대체문구">
+                </th:block>
+                <th:block th:unless="${member.memberAttachFile==1}">
+                  <img th:src="@{/images/memberProfile.png}" alt="이미지대체문구">
+                </th:block>
+              </div>
+              <input type="hidden" th:value="${member.id}" id="id" name="id">
+              <input type="hidden" th:value="${member.role}" id="role" name="role">
+              <div class="card-down">
+                <div>
+                  <label for="userEmail">이메일</label>
+                  <span th:text="${member.userEmail}" id="userEmail" name="userEmail"></span>
+                </div>
+                <div>
+                  <label for="name">이름</label>
+                  <span th:text="${member.name}" id="name" name="name"></span>
+                </div>
+                <div>
+                  <label for="phoneNumber">번호</label>
+                  <span th:text="${member.phoneNumber}" id="phoneNumber" name="phoneNumber"></span>
+                </div>
+                <div>
+                  <label for="address">주소</label>
+                  <span th:text="${member.address}" id="address" name-="address"></span>
+                </div>
+
+                <div>
+                  <label for="createTime">신청일</label>
+                  <span th:text="${#temporals.format(member.createTime, 'yy년MM월dd일 HH시mm분')}" id="createTime"
+                        name="createTime"></span>
+                </div>
+
+
+                <div>
+                  <label for="department">부서</label>
+                  <select id="department" name="department">
+                    <option th:each="de : ${depart}" th:value="${de.dptName}"
+                            th:text="${de.dptName}">
+                    </option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="mRank">직급</label>
+                  <select id="mRank" name="mRank">
+                    <option th:each="re : ${rank}" th:value="${re.rankName}"
+                            th:text="${re.rankName}">
+                    </option>
+                  </select>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gogo">
+          <button onClick="memberAppOkFn()">승인</button>
+          <button onClick="memberAppNoReady()">거절</button>
+        </div>
+        <div class="bottom1">
+          <div class="memberDto">
+            <div class="memberDto-con">
+              <div class="paging">
+                <ul>
+                  <li>
+                    <span th:if="${memberDto.pageable.pageNumber+1 eq 1}" class="span0">START</span>
+                    <span th:unless="${memberDto.pageable.pageNumber+1 eq 1}">
+                      <a th:href="@{/member/memberAppList(page=0)}" class="span1">처음</a>
+                </span>
+                  </li>
+                  <li>
+                    <!-- 이전페이지가 첫번째 페이지면 span표시 -->
+                    <span th:if="${1==memberDto.pageable.pageNumber+1}" class="span0">PRE</span>
+                    <span th:unless="${1==memberDto.pageable.pageNumber+1}">
+                  <a th:href="@{/member/memberAppList(page=${memberDto.pageable.pageNumber-1})}" class="span1">이전</a>
+                </span>
+                  </li>
+                  <!--block -->
+                  <!-- 페이지번호 -->
+                  <li th:each="i: ${#numbers.sequence(startPage, endPage)}" class="block">
+                    <span th:if="${i==memberDto.pageable.pageNumber+1}" th:text="${i}" class="now"></span>
+                    <a th:unless="${i== memberDto.pageable.pageNumber+1}"
+                       th:href="@{/member/memberAppList(page=${i - 1})}" th:text="${i}"></a>
+                  </li>
+                  <li>
+                    <!-- 현재페이지가 마지막 페이지면 span 표시 -->
+                    <span th:if="${memberDto.totalPages ==memberDto.pageable.pageNumber+1}"
+                          class="span0">NEXT</span>
+                    <!-- 현재페이지가 마지막 페이지가아니면 a표시 현재페이지 +1 -->
+                    <span th:unless="${memberDto.totalPages ==memberDto.pageable.pageNumber+1}">
+                    <a th:href="@{/member/memberAppList(page=${memberDto.pageable.pageNumber+1})}" class="span1">다음</a>
+                </span>
+                  </li>
+                  <li>
+                    <!-- 현재페이지가 마지막 페이지면 span 표시 -->
+                    <span th:if="${memberDto.totalPages ==memberDto.pageable.pageNumber+1}"
+                          class="span0">END</span>
+                    <!-- 현재페이지가 마지막 페이지가아니면 마지막페이지로 이동해라  a -->
+                    <span th:unless="${memberDto.totalPages ==memberDto.pageable.pageNumber+1}">
+                  <a th:href="@{/member/memberAppList(page=${memberDto.totalPages-1})}" class="span1">마지막</a>
+                </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</html>

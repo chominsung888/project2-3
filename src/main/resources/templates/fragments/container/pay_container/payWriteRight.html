@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="payWriteRightFragment">
+    <div class="right-con">
+        <div class="right-top">
+            <div class="gnb">
+                <ul>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="myInfo"
+                             th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                            <li>
+                                <a th:text="${#authentication.principal.department}"></a>
+                                <a th:text="${#authentication.principal.mRank}"></a>
+                                <a th:text="${#authentication.principal.name}"></a>
+                                <p>님</p>
+                            </li>
+                        </div>
+                        <li>
+
+                        </li>
+                        <li><a th:href="@{/logout}">로그아웃</a></li>
+                    </th:block>
+                    <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a th:href="@{/my/schedule}">Fullcalendar</a>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-bottom">
+            <form th:action="@{/pay/payWrite}" method="post" enctype="multipart/form-data"
+                  th:object="${payDto}">
+
+                <h1 style="font-style: bold; color: #fff;">급여작성</h1>
+
+
+                <ul class="form-list">
+
+                    <li>
+                        <td><label for="memberId">회원아이디</label></td>
+                        <td><input type="text" name="memberId" id="memberId" th:value="${memberId}" readonly></td>
+                    </li>
+                    <li>
+                        <td><label for="payBns">payBns</label></td>
+                        <td><input type="text" name="payBns" id="payBns" th:value="${payBns}"></td>
+                    </li>
+                    <li>
+                        <td><label for="startDate">startTime</label></td>
+                        <td><input type="datetime-local" id="startDate" th:field="*{startDate}"></td>
+                    </li>
+                    <li>
+                        <td><label for="endDate">endTime</label></td>
+                        <td><input type="datetime-local" id="endDate" th:field="*{endDate}"></td>
+                    </li>
+                    <li>
+                        <td colspan="2"><input type="submit" value="급여작성실행"></td>
+                    </li>
+
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

@@ -2,7 +2,7 @@ package org.spring.codingStory.board.notice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.spring.codingStory.board.employee.entity.EmployeeEntity;
+import org.spring.codingStory.board.notice.dto.NoticeFileDto;
 import org.spring.codingStory.contraint.BaseTimeEntity;
 
 import javax.persistence.*;
@@ -31,5 +31,13 @@ public class NoticeFileEntity extends BaseTimeEntity {
     @JoinColumn(name = "notice_id")
     private NoticeEntity noticeEntity;
 
+    public static NoticeFileEntity toInsertNoticeFile(NoticeFileDto noticeFileDto) {
+        NoticeFileEntity noticeFileEntity=new NoticeFileEntity();
+        noticeFileEntity.setNoticeNewFileName(noticeFileDto.getNoticeNewFileName());
+        noticeFileEntity.setNoticeOldFileName(noticeFileDto.getNoticeOldFileName());
+        noticeFileEntity.setNoticeEntity(noticeFileDto.getNoticeEntity());
+
+        return noticeFileEntity;
+    }
 
 }

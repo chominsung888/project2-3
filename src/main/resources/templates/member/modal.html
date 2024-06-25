@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>index</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />-->
+  <link rel="stylesheet" th:href="@{/css/member/test.css}">
+  <script th:src="@{/js/member/test.js}" defer></script>
+</head>
+<body>
+<label for="test1">여기</label>
+<input type="text" id="test1">
+
+
+
+<div class="blocker" style="display:none">
+<div id="modal4" class="modal">
+
+
+  <input type="text" value="입력" id="test2">
+  
+  <button onClick="testFn()">넣기</button>
+
+  <a href="#" rel="modal:close">닫기</a>
+</div>
+</div>
+
+
+
+<p><a href="#modal4" rel="modal:open">수정</a></p>
+
+<h1>423543543543</h1>
+
+
+
+
+<!--22222222222222222222222-->
+<button id="modalBtn">모달 열기</button>
+<div id="myModal" class="modal2">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>모달 내용</p>
+
+  <a class="close2" href="">닫기</a>
+  </div>
+</div>
+
+
+<h1>===============================</h1>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

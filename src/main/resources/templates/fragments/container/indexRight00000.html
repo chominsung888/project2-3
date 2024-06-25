@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="right" th:fragment="indexRightFragment">
+  <div class="right-con">
+    <div class="right-top">
+      <div class="gnb">
+        <ul>
+            <th:block sec:authorize="isAnonymous()">
+                <li><a th:href="@{/login}">로그인</a></li>
+                <li><a th:href="@{/member/join}">회원가입</a></li>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <div class="myInfo" th:onClick="|location.href='@{/member/myDetail/{id}(id=${#authentication.principal.memberEntity.id})}'|">
+                  <li>
+                <p th:text="${#authentication.principal.department}"></p>
+                  </li>
+                  <li>
+                <p th:text="${#authentication.principal.mRank}"></p>
+                  </li>
+                  <li>
+                <p th:text="${#authentication.principal.name}"></p>님
+                  </li>
+                </div>
+                <li><a th:href="@{/logout}">로그아웃</a></li>
+            </th:block>
+
+
+          <li th:block th:if="${#authorization.expression('isAuthenticated()')}">
+            <!--사용자가 인증 되어 있으면 보이는 메뉴 -->
+            <a th:href="@{/my/schedule}">Fullcalendar</a>
+          </li>
+          <li>
+
+
+
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="bottom">
+      <div class="index-data">
+        data
+      </div>
+    </div>
+  </div>
+</div>
+</html>

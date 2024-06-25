@@ -1,0 +1,93 @@
+@import url(/css/common/reset.css);
+@import url(/css/common/left.css);
+
+
+.right-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f1f1f100;
+    margin-top: 50px; /* ìœ„ì—ì„œ 200px ë–¨ì–´ëœ¨ë¦¼ */
+}
+
+.admin-data {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.form-list {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-top: 1px solid #000;
+    width: 500px;
+}
+
+.form-list li label {
+    padding: 5px 5px 5px 10px;
+    flex: 1;
+    text-align: left;
+    margin-right: 10px;
+    font-weight: bold;
+    background-color: #3e688894;
+    border: 1px solid #607D8B;
+    border-radius: 5px;
+}
+
+.form-list li input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+    background-color:#f1f1f100;
+}
+
+.submit-cell {
+    text-align: center;
+    border: none;
+}
+
+.form-list li input[type="submit"] {
+    background-color: #dedfbc !important;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #007b5e;
+}
+
+.right-top .gnb ul li a {
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s;
+}
+
+.right-top .gnb ul li a:hover {
+    color: #555;
+    text-decoration: underline;
+}

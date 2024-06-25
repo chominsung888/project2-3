@@ -1,0 +1,36 @@
+@import url(/css/common/reset.css);
+@import url(/css/common/left.css);
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+/*index*/
+.container{
+  width:100%;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.index{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.index .right .right-con .bottom{
+  box-sizing: border-box;
+}
+.index .right .right-con .bottom .index-data{
+  height: calc( 100vh - 100px );
+  box-sizing: border-box;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

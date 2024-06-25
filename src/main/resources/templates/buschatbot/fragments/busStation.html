@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<div class="part-busSt" th:if="${msg.answer.busArr != null}" th:fragment="busStationFragment">
+  <div class="part-busSt" th:if="${msg.answer.busArr != null}">
+
+    <div class="arrInfo">
+
+
+      <div class="arrInfo-con">
+        <li class="title">
+          <span th:text="${msg.answer.busArr.arsId}" style="color:#ccc;"></span>
+          <span th:text="${msg.answer.busArr.stNm}" style="font-size:16px;"></span>
+        </li>
+
+
+        <li class="arrBus1">
+          <span th:text="${msg.answer.busArr.busRouteAbrv}" class="busName"></span>
+          <span th:text="${msg.answer.busArr.arrmsg1}" class="busArr"></span>
+          <div th:if="${msg.answer.busArr.brdrde_Num1} == '0'">
+            <span class="dkftndjqtdma">알수없음</span>
+          </div>
+          <div th:if="${msg.answer.busArr.brdrde_Num1} == '3'">
+            <span class="dudb">어유</span>
+          </div>
+          <div th:if="${msg.answer.busArr.brdrde_Num1} == '4'">
+            <span class="qhxhd">보통</span>
+          </div>
+          <div th:if="${msg.answer.busArr.brdrde_Num1} == '5'">
+            <span class="ghswkq">혼잡</span>
+          </div>
+
+        </li>
+
+        <li class="arrBus2">
+          <span th:text="${msg.answer.busArr.busRouteAbrv}" class="busName"></span>
+          <span th:text="${msg.answer.busArr.arrmsg2}" class="busArr"></span>
+          <div th:if="${msg.answer.busArr.brdrde_Num2} == '0'">
+            <span class="dkftndjqtdma">알수없음</span>
+          </div>
+          <div th:if="${msg.answer.busArr.brdrde_Num2} == '3'">
+            <span class="dudb">어유</span>
+          </div>
+          <div th:if="${msg.answer.busArr.brdrde_Num2} == '4'">
+            <span class="qhxhd">보통</span>
+          </div>
+          <div th:if="${msg.answer.busArr.brdrde_Num2} == '5'">
+            <span class="ghswkq">혼잡</span>
+          </div>
+        </li>
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="part" th:if="${msg.answer.busArr.stNm == null}">
+    <p>
+      존재하지 .
+    </p>
+  </div>
+</div>
+</html>

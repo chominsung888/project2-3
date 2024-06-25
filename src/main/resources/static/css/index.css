@@ -1,0 +1,378 @@
+@import url(/css/common/reset.css);
+@import url(/css/common/left.css);
+/*index*/
+.container{
+  width:100%;
+}
+.index{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.index .right .right-con .bottom{
+  padding: 10px ;
+  box-sizing: border-box;
+}
+.index .right .right-con .bottom .index-data{
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 90%;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-bottom: 30px;
+    gap: 30px;
+    color:white;
+}
+.app{
+border: 3px solid #022f5d;
+border-radius: 30px;
+padding: 15px 20px 20px;
+width:400px;
+height:300px;
+}
+.movie{
+border: 3px solid #022f5d;
+border-radius: 30px;
+padding: 15px 20px 20px;
+width:400px;
+height:300px;
+}
+.dpt{
+border: 3px solid #022f5d;
+border-radius: 30px;
+padding: 15px 20px 20px;
+width:400px;
+height:300px;
+}
+.dpt ul {
+ list-style-type: none;
+ padding-left: 0;
+}
+.dpt ul li {
+ margin-bottom: 10px;
+}
+.dpt ul li ul {
+ padding-left: 20px;
+ }
+.dpt ul li ul li {
+ margin-bottom: 5px;
+}
+
+.time{
+border: 3px solid #022f5d;
+border-radius: 30px;
+padding: 15px 20px 20px;
+margin-top: 20px;
+width:400px;
+height:300px;
+    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능하게 설정 */
+
+}
+.board{
+border: 3px solid #022f5d;
+border-radius: 30px;
+padding: 15px 20px 20px;
+margin-top: 20px;
+width:400px;
+height:300px;
+}
+.freeHit{
+border-top: 1px solid #ccc;
+}
+.notice{
+border: 3px solid #022f5d;
+border-radius: 30px;
+padding: 15px 20px 20px;
+margin-top: 20px;
+width:400px;
+height:300px;
+}
+.noticeHit{
+border-top: 1px solid #ccc;
+}
+.emp{
+border: 3px solid #022f5d;
+border-radius: 30px;
+padding: 15px 20px 20px;
+margin-top: 20px;
+width:400px;
+height:300px;
+}
+.empHit{
+border-top: 1px solid #ccc;
+}
+
+.cal{
+border: 3px solid #022f5d;
+border-radius: 30px;
+padding: 15px 20px 20px;
+margin-top: 20px;
+width:400px;
+height:300px;
+}
+
+.cal ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cal li {
+  margin-bottom: 10px;
+}
+
+.cal li:first-child {
+  font-weight: bold;
+}
+
+#personalCalendar, #allCalendar {
+  padding: 10px;
+
+  border-radius: 5px;
+
+}
+
+#personalCalendar ul, #allCalendar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#personalCalendar ul li, #allCalendar ul li {
+  margin-bottom: 5px;
+  padding: 5px;
+
+}
+#personalCalendar ul li:last-child, #allCalendar ul li:last-child {
+  border-bottom: none;
+}
+
+#personalCalendar ul li:before, #allCalendar ul li:before {
+  content: "• ";
+  color: #007bff;
+  font-weight: bold;
+}
+
+.att {
+border: 3px solid #022f5d;
+border-radius: 30px;
+padding: 15px 20px 20px;
+margin-top: 20px;
+    background: #f1f1f100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+
+        overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능하게 설정 */
+
+        width: 400px;
+        height: 300px;
+
+}
+.currentDate {
+text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.currentTime {
+text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+
+.attendanceWrite-form ul {
+    list-style: none;
+    padding: 0;
+}
+
+.attendanceWrite-form li {
+    margin-bottom: 10px;
+}
+
+.attendanceWrite-form label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.attendanceWrite-form input[type="text"],
+.attendanceWrite-form input[type="hidden"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-container input[type="button"] {
+    width: 48%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #dedfbc;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-container input[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+.attendance-info {
+    margin-top: 10px;
+    color: white;
+}
+
+.attendance-info .info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.attendance-info .label {
+    font-weight: bold;
+}
+
+.attendance-info .value {
+    text-align: right;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.attendance-info p{
+font-size: 24px;
+color: white;
+
+}
+
+.clock-wrapper {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.clock-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #181818;
+    border: 5px solid #181818;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.55) inset;
+}
+
+.ROLEX {
+    width: 50px;
+    height: auto;
+    position: absolute;
+    top: 27%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+
+}
+
+
+
+.light .clock-frame {
+    position: relative;
+    background: #f8f8f8;
+    border: 5px solid #181818;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.45) inset;
+}
+
+.light .graduations {
+    background: #666;
+}
+
+.light .hour-number {
+    color: #181818;
+}
+
+.light .minutes,
+.light .hours {
+    background: #181818;
+}
+
+.dark .clock-frame {
+    position: relative;
+    background: #181818;
+    border: 5px solid #181818;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.55) inset;
+}
+
+.dark .graduations {
+    background: #aaa;
+}
+
+.dark .hour-number {
+    color: #f2f2f2;
+}
+
+.dark .minutes,
+.dark .hours {
+    background: #eee;
+}
+
+.light .clock-frame::before,
+.dark .clock-frame::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 4px -1px black;
+    z-index: 10;
+
+}
+
+/*인덱스 결재 숫자 카운팅*/
+.bottom .index-data .app .apv{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    height:310px;
+    font-size:30px;
+    text-align:center;
+    margin-top:15px;
+}
+.bottom .index-data .app .apv a:hover{
+    color:rgb(182 93 247);
+}
+.bottom .index-data .app .apv a span{
+font-size:40px;
+text-decoration:underline;
+}
+.bottom .index-data .app .apv a:last-child{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+

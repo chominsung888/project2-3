@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout/pay/payIndexLayout}" ><!-- 기본레이아웃  -->
+<!-- head layout 설정된  fragment -->
+<th:block layout:fragment="title">
+    <title>admin </title>
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/pay/payIndex.css}">
+    <link rel="stylesheet" th:href="@{/css/attendance/attendanceRight.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</th:block>
+
+</head>
+<body>
+
+</body>
+</html>
